@@ -1,0 +1,44 @@
+.operation__item{
+}
+
+div{
+
+
+}
+
+.row .col-1 {
+  border: solid 1px red;
+  float: left;
+  width: 120px;
+}
+.row .col-2 {
+  width: 400px;
+  border: solid 1px blue;
+  float: left;
+}
+
+.row .col-3 {
+  border: solid 1px green;
+}
+.col{
+  height: 40px;
+}
+
+
+
+.category__item{
+}
+.place__item{
+}
+.address__item{
+}
+.info-order__item{
+}
+.time__item {
+
+}
+.time__item{
+}
+.price__item{
+}
+

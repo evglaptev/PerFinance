@@ -1,5 +1,6 @@
 body{
   margin: 0;
+
 }
 .period__list{
   width: 83%;
@@ -11,6 +12,8 @@ body{
   width:15%;
   position: fixed;
   margin: 0;
+  height: 300px;
+
 
   border: solid 1px royalblue;
 }
