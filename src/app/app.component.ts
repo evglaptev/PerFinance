@@ -10,11 +10,12 @@ import {IData} from './shared/idata';
 export class AppComponent {
   title = 'app works!';
   data: IData[];
-  item:IData;
-
+  item: IData;
+items: string[];
 
   constructor(private as: DataService) {
-    as.getDataByName("Вася",val=>{this.item= val[0].userName});
+    as.getDataByName('Вася', val => {this.data = val; });
+    this.items = ['AZS', 'HEALTH', 'FOOD'];
   }
 
 

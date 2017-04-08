@@ -15,17 +15,15 @@ export class DataService {
     this.asyncDataService
       .getDataByName(name)
       .subscribe((response: Response) => {
-        this.data = response.json();
-        /*this.data =(JSON.parse(
+        this.data =(JSON.parse(
         response.text(), (key, val) => {
           if (key === 'time'){
-            console.dir(key);
             return new Date(Date.parse(val));
           }
             return val;
         }
       ));
-*/
+
         console.dir(this.data);
         callback(this.data);
 

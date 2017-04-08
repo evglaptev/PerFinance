@@ -1,6 +1,13 @@
 <h1>
   {{title}}
 </h1>
-
-
-{{item}}
+<div class="period__list">
+<app-period-item-list></app-period-item-list>
+</div>
+<div class="category__list">
+<app-category-item-list [items]="items"></app-category-item-list>
+</div>
+<div class="operation__list">
+<app-operation-item-list [data]="data" >
+</app-operation-item-list>
+</div>
