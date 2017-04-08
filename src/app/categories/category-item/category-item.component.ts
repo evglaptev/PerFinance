@@ -13,4 +13,10 @@ export class CategoryItemComponent implements OnInit {
   ngOnInit() {
   }
 
+  setCategory(){
+    console.dir("Кликнул на " + this.item);
+
+
+  }
+
 }

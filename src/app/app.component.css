@@ -4,7 +4,6 @@ body{
 }
 .period__list{
   width: 83%;
-  border: solid 1px cadetblue;
   margin: 10px 2% 10px 15%;
 }
 .category__list{
@@ -15,10 +14,8 @@ body{
   height: 300px;
 
 
-  border: solid 1px royalblue;
 }
 .operation__list{
   width: 83%;
   margin: 10px 2% 0 15% ;
-  border: solid 1px darkviolet;
 }

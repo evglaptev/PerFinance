@@ -1,6 +1,10 @@
 li{
   list-style-type: none;
   margin: 10px 5px;
+  border-radius: 3px;
+  background-color: #eee;
+  text-align: center;
+  color: gray;
 }
 ul{
   padding: 5px;

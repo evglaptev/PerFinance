@@ -1,3 +1,23 @@
+ul{
+  padding: 0;
+  margin: 0;
+  background-color:darkgray;
+  border-radius: 5px;
+  border: solid 1px dimgray;
+}
 li{
-  margin: 30px auto;
+  margin: 10px 10px;
+  list-style: none;
+  height: 30px;
+  text-align: center;
+  vertical-align: middle;
+
+}
+
+li:hover{
+
+color: darkslategrey;
+  background-color: lightgray;
+  border-radius: 5px;
+  cursor: pointer;
 }
