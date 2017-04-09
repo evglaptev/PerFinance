@@ -3,7 +3,7 @@ body{
 
 }
 .period__list{
-  width: 83%;
+  width: 700px;
   margin: 10px 2% 10px 15%;
 }
 .category__list{
@@ -16,6 +16,6 @@ body{
 
 }
 .operation__list{
-  width: 83%;
+  width: 700px;
   margin: 10px 2% 0 15% ;
 }

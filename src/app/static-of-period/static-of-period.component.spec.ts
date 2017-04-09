@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CategoryItemComponent } from './category-item.component';
+import { StaticOfPeriodComponent } from './static-of-period.component';
 
-describe('CategoryItemComponent', () => {
-  let component: CategoryItemComponent;
-  let fixture: ComponentFixture<CategoryItemComponent>;
+describe('StaticOfPeriodComponent', () => {
+  let component: StaticOfPeriodComponent;
+  let fixture: ComponentFixture<StaticOfPeriodComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CategoryItemComponent ]
+      declarations: [ StaticOfPeriodComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CategoryItemComponent);
+    fixture = TestBed.createComponent(StaticOfPeriodComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

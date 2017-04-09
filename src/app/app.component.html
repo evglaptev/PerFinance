@@ -1,10 +1,19 @@
 <div class="period__list">
-<app-period-item-list></app-period-item-list>
+
+  <app-period-item-list (onTimePeriodChange) = "onTimePeriodChange($event)" ></app-period-item-list>
 </div>
 <div class="category__list">
-<app-category-item-list [items]="items"></app-category-item-list>
+<app-category-item-list [currentCategory]="currentCategory" (categoryChange) = "onCategoryChange($event)"></app-category-item-list>
 </div>
-<div class="operation__list">
-<app-operation-item-list [data]="data" >
+<div *ngIf="isOperationListView" class="operation__list">
+<app-operation-item-list [data]="forViewData" >
 </app-operation-item-list>
 </div>
+
+<div *ngIf="isTimePeriodView" class="static__of__period">
+  <app-static-of-period [groupList]="groupList">
+    Здесь будет статистика
+  </app-static-of-period>
+</div>
+
+

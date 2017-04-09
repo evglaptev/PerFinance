@@ -1,5 +1,6 @@
 export enum Category {
   AZS,
   Food,
-  Health
+  Health,
+  ALL
 }

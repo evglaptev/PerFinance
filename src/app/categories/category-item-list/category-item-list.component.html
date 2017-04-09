@@ -1,6 +1,13 @@
 
 <ul class="category__list">
-  <li *ngFor="let item of items">
-<app-category-item [item]="item"></app-category-item>
+  <li *ngFor="let item of categoriesName">
+    <div
+      class="filters__item"
+      [class.filters__item_selected]="isActive(item.id)"
+      (click)="setFilter(item.id)">
+      {{item.value}}
+    </div>
+
   </li>
 </ul>
+
