@@ -18,6 +18,7 @@ export class DataService {
         this.data =(JSON.parse(
         response.text(), (key, val) => {
           if (key === 'time'){
+
             return new Date(Date.parse(val));
           }
             return val;

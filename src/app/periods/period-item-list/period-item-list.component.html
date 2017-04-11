@@ -1,6 +1,6 @@
 
 <ul>
-  <li >Неделя</li>
-  <li>Месяц</li>
-  <li (click)="changePeriod()">Год</li>
+  <li (click)="changePeriod(this.currentDay)">День</li>
+  <li (click)="changePeriod(this.currentMonth)" >Месяц</li>
+  <li (click)="changePeriod(this.currentYear)">Год</li>
 </ul>
