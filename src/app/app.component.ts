@@ -16,7 +16,7 @@ import {ITimePeriod} from './itime-period';
 export class AppComponent {
   forViewData: IData[];
   data: IData[];
-  periodData: IData[]
+  periodData: IData[];
   currentCategory: Category = Category.ALL;
   isTimePeriodView: boolean;
   isOperationListView: boolean;
@@ -54,10 +54,8 @@ export class AppComponent {
         && item.time.getTime() <= timePeriod.to.getTime()
       );
     });
-
-    this.isTimePeriodView = true;
     this.isOperationListView = false;
-     this.update();
+    this.isTimePeriodView = true;
   }
 
 
