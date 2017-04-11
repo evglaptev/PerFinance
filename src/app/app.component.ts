@@ -16,43 +16,7 @@ import {ITimePeriod} from './itime-period';
 export class AppComponent {
   forViewData: IData[];
   data: IData[];
-  groupList = {
-    sumAzs: 0,
-    sumHealth: 0,
-    sumFood: 0,
-    sumAll: 0
-  };
-  groupCategory = {
-
-    categoryList: {
-      length: 0,
-    },
-  incPriceForCategory : function (cat: Category, price: number) {
-    if (this.categoryList[cat]) {
-      this.categoryList[cat] = this.categoryList[cat] + price;
-    } else {
-      this.categoryList[cat] = price;
-      this.categoryList.length++;
-    }
-    this.categoryList[Category.ALL] =(this.categoryList[Category.ALL]) ?
-      this.categoryList[Category.ALL] + price : price;
-  },
-
-  getPriceCategory : function(cat: Category){
-    if (this.categoryList[cat]) return this.categoryList[cat];
-    console.dir(cat + ' is ' + this.categoryList[cat]);
-  },
-    getCategoryList: function(){
-      return this.categoryList;
-    },
-    clear: function () {
-      this.categoryList = {
-        length: 0
-      };
-
-    }
-};
-
+  periodData: IData[]
   currentCategory: Category = Category.ALL;
   isTimePeriodView: boolean;
   isOperationListView: boolean;
@@ -84,32 +48,16 @@ export class AppComponent {
 
 
   onTimePeriodChange(timePeriod: ITimePeriod) {
-    const periodData: IData[] = this.data.filter(item => {
+    this.periodData = this.data.filter(item => {
       return (
         item.time.getTime() >= timePeriod.from.getTime()
         && item.time.getTime() <= timePeriod.to.getTime()
       );
-
-
     });
 
-
-    this.groupCategory.clear();
-
-
-
-    periodData.forEach(item => {
-          this.groupCategory.incPriceForCategory(item.type, item.price);
-    });
-
-    this.groupList.sumFood = this.groupCategory.getPriceCategory(Category.Food);
-    this.groupList.sumHealth = this.groupCategory.getPriceCategory(Category.Health);
-    this.groupList.sumAzs = this.groupCategory.getPriceCategory(Category.AZS);
-    this.groupList.sumAll = this.groupCategory.getPriceCategory(Category.ALL);
     this.isTimePeriodView = true;
     this.isOperationListView = false;
-    this.update();
-
+     this.update();
   }
 
 
