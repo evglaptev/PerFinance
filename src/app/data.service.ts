@@ -24,8 +24,6 @@ export class DataService {
             return val;
         }
       ));
-
-        console.dir(this.data);
         callback(this.data);
 
       });

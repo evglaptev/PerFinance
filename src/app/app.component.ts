@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import {DataService} from './data.service';
 import {IData} from './shared/idata';
 import {Category} from './constants/category.enum';
-import {hasProperties} from 'codelyzer/util/astQuery';
-import {isNumber} from 'util';
 import {ITimePeriod} from './itime-period';
 
 @Component({
@@ -12,8 +10,10 @@ import {ITimePeriod} from './itime-period';
   styleUrls: ['./app.component.css']
 })
 
+
+
+
 export class AppComponent {
-  title = 'app works!';
   forViewData: IData[];
   data: IData[];
   groupList = {
@@ -22,6 +22,31 @@ export class AppComponent {
     sumFood: 0,
     sumAll: 0
   };
+  groupCategory = {
+
+    categoryList: {
+      length: 0
+    },
+  incPriceForCategory : function (cat: Category, price: number) {
+    if (this.categoryList[cat]) {
+      this.categoryList[cat] = this.categoryList[cat] + price;
+    } else {
+      this.categoryList[cat] = price;
+      this.categoryList.length++;
+    }
+  },
+
+  getPriceCategory : function(cat: Category){
+    if (this.categoryList[cat]) return this.categoryList[cat];
+    console.dir('this category is ' + this.categoryList[cat]);
+  },
+    clear:function () {
+      this.categoryList = {
+        length: 0
+      }
+
+    }
+};
 
   currentCategory: Category = Category.ALL;
   isTimePeriodView: boolean;
@@ -55,10 +80,6 @@ export class AppComponent {
 
   onTimePeriodChange(timePeriod: ITimePeriod) {
     const periodData: IData[] = this.data.filter(item => {
-      if (
-        item.time.getTime() >= timePeriod.from.getTime()
-        && item.time.getTime() <= timePeriod.to.getTime()
-      ) console.dir(true);
       return (
         item.time.getTime() >= timePeriod.from.getTime()
         && item.time.getTime() <= timePeriod.to.getTime()
@@ -68,32 +89,16 @@ export class AppComponent {
     });
 
 
-    this.groupList.sumAzs = 0;
-    this.groupList.sumFood = 0;
-    this.groupList.sumHealth = 0;
-    console.dir(periodData);
+    this.groupCategory.clear();
+
+
 
     periodData.forEach(item => {
-
-      switch (item.type) {
-
-        case Category.AZS: {
-          this.groupList.sumAzs += item.price;
-          return;
-        }
-        case Category.Health: {
-
-          this.groupList.sumHealth += item.price;
-          return;
-        }
-        case Category.Food: {
-
-          this.groupList.sumFood += item.price;
-          return;
-        }
-
-      }
+          this.groupCategory.incPriceForCategory(item.type, item.price);
     });
+    this.groupList.sumFood = this.groupCategory.getPriceCategory(Category.Food);
+    this.groupList.sumHealth = this.groupCategory.getPriceCategory(Category.Health);
+    this.groupList.sumAzs = this.groupCategory.getPriceCategory(Category.AZS);
     this.groupList.sumAll = this.groupList.sumAzs + this.groupList.sumFood + this.groupList.sumHealth;
     this.isTimePeriodView = true;
     this.isOperationListView = false;
