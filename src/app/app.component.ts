@@ -25,7 +25,7 @@ export class AppComponent {
   groupCategory = {
 
     categoryList: {
-      length: 0
+      length: 0,
     },
   incPriceForCategory : function (cat: Category, price: number) {
     if (this.categoryList[cat]) {
@@ -34,16 +34,21 @@ export class AppComponent {
       this.categoryList[cat] = price;
       this.categoryList.length++;
     }
+    this.categoryList[Category.ALL] =(this.categoryList[Category.ALL]) ?
+      this.categoryList[Category.ALL] + price : price;
   },
 
   getPriceCategory : function(cat: Category){
     if (this.categoryList[cat]) return this.categoryList[cat];
-    console.dir('this category is ' + this.categoryList[cat]);
+    console.dir(cat + ' is ' + this.categoryList[cat]);
   },
-    clear:function () {
+    getCategoryList: function(){
+      return this.categoryList;
+    },
+    clear: function () {
       this.categoryList = {
         length: 0
-      }
+      };
 
     }
 };
@@ -96,10 +101,11 @@ export class AppComponent {
     periodData.forEach(item => {
           this.groupCategory.incPriceForCategory(item.type, item.price);
     });
+
     this.groupList.sumFood = this.groupCategory.getPriceCategory(Category.Food);
     this.groupList.sumHealth = this.groupCategory.getPriceCategory(Category.Health);
     this.groupList.sumAzs = this.groupCategory.getPriceCategory(Category.AZS);
-    this.groupList.sumAll = this.groupList.sumAzs + this.groupList.sumFood + this.groupList.sumHealth;
+    this.groupList.sumAll = this.groupCategory.getPriceCategory(Category.ALL);
     this.isTimePeriodView = true;
     this.isOperationListView = false;
     this.update();
