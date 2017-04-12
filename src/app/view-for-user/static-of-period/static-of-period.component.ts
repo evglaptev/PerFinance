@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Category} from 'app/constants/category.enum';
 import {IData} from '../shared/idata';
+import {Category} from "../constants/category.enum";
 
 @Component({
   selector: 'app-static-of-period',
