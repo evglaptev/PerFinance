@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Category} from 'app/constants/category.enum';
+import {IData} from '../shared/idata';
 
 @Component({
   selector: 'app-static-of-period',
@@ -8,8 +9,17 @@ import {Category} from 'app/constants/category.enum';
 })
 export class StaticOfPeriodComponent implements OnInit {
 
-  @Input() periodData;
+  _periodData: IData[];
+  get periodData(): IData[] {
+    return this._periodData;
+  }
 
+  @Input('periodData')
+  set allowDay(value: IData[]) {
+    console.dir(value);
+    this._periodData = value;
+    this.update();
+  }
     categoryList: {
       length: 0,
     };
@@ -17,6 +27,19 @@ export class StaticOfPeriodComponent implements OnInit {
   All: 0;
   Food: 0;
   Health: 0;
+  update(){
+
+    this.clear();
+    this.periodData.forEach(item => {
+      this.incPriceForCategory(item.type, item.price);
+    });
+    this.AZS = this.getPriceCategory(Category.AZS) || 0;
+    this.Food = this.getPriceCategory(Category.Food) || 0;
+    this.Health = this.getPriceCategory(Category.Health) || 0;
+    this.All = this.getPriceCategory(Category.ALL) || 0;
+    console.dir(this.AZS);
+
+  }
   incPriceForCategory(cat: Category, price: number) {
     if (this.categoryList[cat]) {
       this.categoryList[cat] = this.categoryList[cat] + price;
@@ -44,17 +67,7 @@ export class StaticOfPeriodComponent implements OnInit {
   constructor() {
   }
   ngOnInit() {
-    this.clear();
-    console.dir('ngOnInit');
-
-    console.dir(this.periodData);
-    this.periodData.forEach(item => {
-      this.incPriceForCategory(item.type, item.price);
-    });
-    this.AZS = this.getPriceCategory(Category.AZS);
-    this.Food = this.getPriceCategory(Category.Food);
-    this.Health = this.getPriceCategory(Category.Health);
-    this.All = this.getPriceCategory(Category.ALL);
+    this.update();
   }
 
 }
