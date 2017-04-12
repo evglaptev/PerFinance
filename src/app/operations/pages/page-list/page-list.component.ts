@@ -9,12 +9,7 @@ export class PageListComponent implements OnInit {
 
   @Input() listNumPage: number[];
   @Output() onClickPage = new EventEmitter();
-// pageList : number[];
   constructor() {
-   // this.pageList = [];
-  //  for (let i = 1, i <= this.pageNumber; i++){
-  //  }
-
   }
 
   onPageClick(numberPage: number){

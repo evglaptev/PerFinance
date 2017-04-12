@@ -33,7 +33,7 @@ export class AppComponent {
 
 
   onCategoryChange(currentCategory: Category) {
-
+console.dir('Category change');
     if (
       this.currentCategory === currentCategory && this.isOperationListView === true
     ) return;

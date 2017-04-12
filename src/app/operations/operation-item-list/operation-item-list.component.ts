@@ -8,13 +8,24 @@ import {isNumber} from 'util';
   styleUrls: ['./operation-item-list.component.css']
 })
 export class OperationItemListComponent implements OnInit {
-  @Input() data: IData[];
+  _data: IData[];
+  get data(): IData[] {
+    return this._data;
+  }
+
+  @Input('data')
+  set allowDay(value: IData[]) {
+    this._data = value;
+    this.updateCurrentPageData();
+  }
+
+
   currentPageData: IData[];
   currentPage: number;
   lengthData: number;
   elementsOnPage: number;
   pageNumber: number;
-  listNumPage:number[];
+  listNumPage: number[];
 
   constructor() {
   }
@@ -38,12 +49,8 @@ export class OperationItemListComponent implements OnInit {
   }
 
   updateCurrentPageData() {
-    this.currentPageData=[];
     this.currentPageData = [];
-    this.currentPageData = this.data.splice(this.elementsOnPage*(this.currentPage - 1), this.elementsOnPage);
-    console.dir(this.currentPageData);
-    console.dir(this.elementsOnPage*(this.currentPage - 1));
-    console.dir(this.currentPage * this.elementsOnPage);
+    this.currentPageData = this.data.splice(this.elementsOnPage * (this.currentPage - 1), this.elementsOnPage);
   }
 
 }
