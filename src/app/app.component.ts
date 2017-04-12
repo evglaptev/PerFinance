@@ -28,7 +28,7 @@ export class AppComponent {
       this.data = val;
     });
 
-    this.update();
+   // this.update();
   }
 
 

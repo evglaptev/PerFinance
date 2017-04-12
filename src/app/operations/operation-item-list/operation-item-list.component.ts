@@ -8,16 +8,18 @@ import {isNumber} from 'util';
   styleUrls: ['./operation-item-list.component.css']
 })
 export class OperationItemListComponent implements OnInit {
+
   _data: IData[];
   get data(): IData[] {
     return this._data;
   }
-
-  @Input('data')
-  set allowDay(value: IData[]) {
+  @Input() set data(value: IData[]) {
     this._data = value;
+    this.updateListNumPage();
     this.updateCurrentPageData();
   }
+
+//@Input() data: IData[];
 
 
   currentPageData: IData[];
@@ -35,22 +37,28 @@ export class OperationItemListComponent implements OnInit {
     this.updateCurrentPageData();
 
   }
-
-  ngOnInit() {
-    this.currentPage = 1;
+  updateListNumPage(){
     this.lengthData = this.data.length;
-    this.elementsOnPage = 8;
+    console.dir("length filtered data: " + this.lengthData);
     this.pageNumber = this.lengthData / this.elementsOnPage;
     this.listNumPage = [];
     for (let i = 1; i <= this.pageNumber; i++) {
       this.listNumPage.push(i);
     }
+  }
+
+  ngOnInit() {
+    this.currentPage = 1;
+
+    this.elementsOnPage = 8;
+
+    this.updateListNumPage();
     this.updateCurrentPageData();
   }
 
   updateCurrentPageData() {
     this.currentPageData = [];
-    this.currentPageData = this.data.splice(this.elementsOnPage * (this.currentPage - 1), this.elementsOnPage);
+    this.currentPageData = this.data.splice(this.elementsOnPage * (this.currentPage - 1), this.elementsOnPage-1);
   }
 
 }
