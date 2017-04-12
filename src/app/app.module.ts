@@ -11,6 +11,7 @@ import { CategoryItemListComponent } from './categories/category-item-list/categ
 import {AsyncDataService} from './async-data.service';
 import {DataService} from './data.service';
 import { StaticOfPeriodComponent } from './static-of-period/static-of-period.component';
+import { PageListComponent } from './operations/pages/page-list/page-list.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { StaticOfPeriodComponent } from './static-of-period/static-of-period.com
     OperationItemListComponent,
     OperationItemComponent,
     CategoryItemListComponent,
-    StaticOfPeriodComponent
+    StaticOfPeriodComponent,
+    PageListComponent
   ],
   imports: [
     BrowserModule,

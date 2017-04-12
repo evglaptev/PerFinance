@@ -1,0 +1,13 @@
+li {
+  list-style: none;
+  float: left;
+  margin-left: 5px;
+  background-color: darkgray;
+  border-radius: 2px;
+}
+
+li:hover{
+  cursor: pointer;
+  background-color: gray;
+  color: greenyellow;
+}
