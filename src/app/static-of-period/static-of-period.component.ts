@@ -16,7 +16,6 @@ export class StaticOfPeriodComponent implements OnInit {
 
   @Input('periodData')
   set allowDay(value: IData[]) {
-    console.dir(value);
     this._periodData = value;
     this.update();
   }
@@ -28,7 +27,6 @@ export class StaticOfPeriodComponent implements OnInit {
   Food: 0;
   Health: 0;
   update(){
-
     this.clear();
     this.periodData.forEach(item => {
       this.incPriceForCategory(item.type, item.price);
@@ -37,7 +35,6 @@ export class StaticOfPeriodComponent implements OnInit {
     this.Food = this.getPriceCategory(Category.Food) || 0;
     this.Health = this.getPriceCategory(Category.Health) || 0;
     this.All = this.getPriceCategory(Category.ALL) || 0;
-    console.dir(this.AZS);
 
   }
   incPriceForCategory(cat: Category, price: number) {

@@ -13,12 +13,12 @@ export class PeriodItemListComponent implements OnInit {
   }
    currentYear : ITimePeriod =  {
     from: new Date( new Date().getFullYear(), 0, 1),
-    to : new Date( new Date().getFullYear(), 11, 31)
+    to : new Date( new Date().getFullYear()+1, 0, 1) // this is bug!
   };
   currentMonth: ITimePeriod =
     {
       from: new Date(new Date().getFullYear(), new Date().getMonth(), 1),
-      to: new Date(new Date().getFullYear(), new Date().getMonth(), 31)
+      to: new Date(new Date().getFullYear(), new Date().getMonth()+1, 1)
     };
   currentDay: ITimePeriod = {
     from: new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()),

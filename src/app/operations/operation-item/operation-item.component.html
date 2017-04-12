@@ -15,7 +15,7 @@
   </div>
   <div class="col-3 col">
   <div class="time__item">
-   <div class="date"> {{item.time.getDay()+'.'+item.time.getMonth()+'.'+item.time.getFullYear()}}</div>
+   <div class="date"> {{item.time.getDate()+'.'+(item.time.getMonth() + 1)+'.'+item.time.getFullYear()}}</div>
     <div class="time"> {{item.time.getHours()+':'+item.time.getMinutes()+':'+item.time.getSeconds()}}</div>
   </div>
   </div>
