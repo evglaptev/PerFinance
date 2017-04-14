@@ -4,11 +4,11 @@ body{
 }
 .period__list{
   width: 700px;
-  margin: 10px 2% 10px 15%;
+  margin: 10px 50px 10px 100px;
 }
 .category__list{
   float: left;
-  width:15%;
+  width:100px;
   position: fixed;
   margin: 0;
   height: 300px;
@@ -17,6 +17,6 @@ body{
 }
 .operation__list{
   width: 700px;
-  margin: 0px 2% 0 15% ;
+  margin: 0px 20px 0 100px ;
   padding-top: 50px;
 }

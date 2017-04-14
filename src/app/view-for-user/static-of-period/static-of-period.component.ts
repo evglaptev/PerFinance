@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {IData} from '../shared/idata';
-import {Category} from "../constants/category.enum";
+import {Category} from '../constants/category.enum';
+import {ITimePeriod} from "app/view-for-user/itime-period";
 
 @Component({
   selector: 'app-static-of-period',
@@ -9,34 +10,59 @@ import {Category} from "../constants/category.enum";
 })
 export class StaticOfPeriodComponent implements OnInit {
 
-  _periodData: IData[];
-  get periodData(): IData[] {
-    return this._periodData;
+  _timePeriod: ITimePeriod;
+  _data: IData[];
+  periodData: IData[];
+  pieChartLabels: string[] = ['AZS', 'Food', 'Health'];
+  pieChartData: number[];
+
+  get currentTimePeriod(): ITimePeriod {
+    return this._timePeriod;
   }
 
-  @Input('periodData')
-  set allowDay(value: IData[]) {
-    this._periodData = value;
+  @Input('currentTimePeriod')
+  set timePeriod(value: ITimePeriod) {
+    this._timePeriod = value;
     this.update();
   }
-    categoryList: {
-      length: 0,
-    };
-  AZS: 0;
-  All: 0;
-  Food: 0;
-  Health: 0;
-  update(){
+
+  get data(): IData[] {
+    return this._data;
+  }
+
+  @Input('data')
+  set data(value: IData[]) {{
+      this._data = value;
+      this.update();
+    }
+  }
+
+  categoryList: {
+    length: 0,
+  };
+
+  update() {
+
+    if (typeof this.data === 'undefined') return;
+      this.periodData = this.data.filter(item => {
+
+      return (
+        item.time.getTime() >= this.currentTimePeriod.from.getTime()
+        && item.time.getTime() <= this.currentTimePeriod.to.getTime()
+      );
+    });
+
     this.clear();
     this.periodData.forEach(item => {
       this.incPriceForCategory(item.type, item.price);
     });
-    this.AZS = this.getPriceCategory(Category.AZS) || 0;
-    this.Food = this.getPriceCategory(Category.Food) || 0;
-    this.Health = this.getPriceCategory(Category.Health) || 0;
-    this.All = this.getPriceCategory(Category.ALL) || 0;
-
+    this.pieChartData = Array.of(
+      this.getPriceCategory(Category.AZS) || 0,
+      this.getPriceCategory(Category.Food) || 0,
+      this.getPriceCategory(Category.Health) || 0
+    );
   }
+
   incPriceForCategory(cat: Category, price: number) {
     if (this.categoryList[cat]) {
       this.categoryList[cat] = this.categoryList[cat] + price;
@@ -52,9 +78,11 @@ export class StaticOfPeriodComponent implements OnInit {
     if (this.categoryList[cat]) return this.categoryList[cat];
     console.dir(cat + ' is ' + this.categoryList[cat]);
   };
+
   getCategoryList() {
     return this.categoryList;
   };
+
   clear() {
     this.categoryList = {
       length: 0
@@ -63,6 +91,7 @@ export class StaticOfPeriodComponent implements OnInit {
 
   constructor() {
   }
+
   ngOnInit() {
     this.update();
   }

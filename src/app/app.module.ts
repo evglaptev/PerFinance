@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 import { AppComponent } from './app.component';
 import { PeriodItemListComponent } from './view-for-user/periods/period-item-list/period-item-list.component';
@@ -14,6 +15,7 @@ import { StaticOfPeriodComponent } from './view-for-user/static-of-period/static
 import { PageListComponent } from './view-for-user/operations/pages/page-list/page-list.component';
 import { LogInComponent } from './log-in/log-in.component';
 import { ViewForUserComponent } from './view-for-user/view-for-user.component';
+import { PieComponent } from './view-for-user/static-of-period/pie/pie.component';
 
 @NgModule({
   declarations: [
@@ -25,12 +27,14 @@ import { ViewForUserComponent } from './view-for-user/view-for-user.component';
     StaticOfPeriodComponent,
     PageListComponent,
     LogInComponent,
-    ViewForUserComponent
+    ViewForUserComponent,
+    PieComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    ChartsModule
   ],
   providers: [AsyncDataService, DataService],
   bootstrap: [AppComponent]

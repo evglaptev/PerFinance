@@ -1,22 +1,3 @@
-
-<div class="body">
-<ul>
-
-
-
-  <li>
-    Потрачено в категории AZS: {{AZS}} р.
-  </li>
-
-  <li>
-    Потрачено в категории Health: {{Health}} р.
-  </li>
-
-  <li>
-    Потрачено в категории Food: {{Food}} р.
-  </li>
-  <li>
-    Потрачено всего: {{All}} р.
-  </li>
-</ul>
+<div class="pie">
+<app-pie [pieChartLabels] = 'pieChartLabels' [pieChartData]="pieChartData" [currentTimePeriod]="currentTimePeriod" ></app-pie>
 </div>

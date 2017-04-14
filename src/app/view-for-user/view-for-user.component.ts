@@ -16,8 +16,8 @@ import {ITimePeriod} from './itime-period';
 export class ViewForUserComponent {
   forViewData: IData[];
   data: IData[];
-  periodData: IData[];
   currentCategory: Category = Category.ALL;
+  currentTimePeriod: ITimePeriod;
   isTimePeriodView: boolean;
   isOperationListView: boolean;
 
@@ -27,13 +27,10 @@ export class ViewForUserComponent {
     dataService.getDataByName('Вася', val => {
       this.data = val;
     });
-
-   // this.update();
   }
 
 
   onCategoryChange(currentCategory: Category) {
-console.dir('Category change');
     if (
       this.currentCategory === currentCategory && this.isOperationListView === true
     ) return;
@@ -48,12 +45,7 @@ console.dir('Category change');
 
 
   onTimePeriodChange(timePeriod: ITimePeriod) {
-    this.periodData = this.data.filter(item => {
-      return (
-        item.time.getTime() >= timePeriod.from.getTime()
-        && item.time.getTime() <= timePeriod.to.getTime()
-      );
-    });
+   this.currentTimePeriod = timePeriod;
     this.isOperationListView = false;
     this.isTimePeriodView = true;
   }
