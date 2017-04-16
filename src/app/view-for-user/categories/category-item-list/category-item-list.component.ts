@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Category} from '../../constants/category.enum';
+import {ICategoriesName} from "../../shared/icategories-name";
 
 @Component({
   selector: 'app-category-item-list',
@@ -7,16 +8,12 @@ import {Category} from '../../constants/category.enum';
   styleUrls: ['./category-item-list.component.css']
 })
 export class CategoryItemListComponent implements OnInit {
-
+  @Input() categoriesName: ICategoriesName[];
   @Input() currentCategory: Category;
   @Output() categoryChange = new EventEmitter();
 
-  categoriesName: { id: Category, value: string }[] = [
-    {id: Category.AZS, value: 'AZS'},
-    {id: Category.Health, value: 'Health'},
-    {id: Category.Food, value: 'Food'},
-    {id: Category.ALL, value: 'All'}
-  ];
+
+
 
   constructor() {
   }

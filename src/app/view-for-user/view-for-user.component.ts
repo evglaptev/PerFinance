@@ -3,6 +3,7 @@ import {DataService} from './data.service';
 import {IData} from './shared/idata';
 import {Category} from './constants/category.enum';
 import {ITimePeriod} from './itime-period';
+import {ICategoriesName} from "./shared/icategories-name";
 
 @Component({
   selector: 'app-view-for-user',
@@ -20,6 +21,14 @@ export class ViewForUserComponent {
   currentTimePeriod: ITimePeriod;
   isTimePeriodView: boolean;
   isOperationListView: boolean;
+  categoriesName: ICategoriesName[] =
+  [
+    {id: Category.AZS, name: 'AZS'},
+    {id: Category.Health, name: 'Health'},
+    {id: Category.Food, name: 'Food'}
+
+  ];
+
 
   constructor(private dataService: DataService) {
     this.isTimePeriodView = false;

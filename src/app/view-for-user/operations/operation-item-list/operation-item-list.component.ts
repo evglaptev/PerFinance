@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {IData} from '../../shared/idata';
 import {isNumber} from 'util';
+import {ICategoriesName} from '../../shared/icategories-name';
 
 @Component({
   selector: 'app-operation-item-list',
@@ -19,7 +20,7 @@ export class OperationItemListComponent implements OnInit {
     this.updateCurrentPageData();
   }
 
-//@Input() data: IData[];
+@Input() categoriesName: ICategoriesName[];
 
 
   currentPageData: IData[];
@@ -39,7 +40,7 @@ export class OperationItemListComponent implements OnInit {
   }
   updateListNumPage(){
     this.lengthData = this.data.length;
-    console.dir("length filtered data: " + this.lengthData);
+    console.dir('length filtered data: ' + this.lengthData);
     this.pageNumber = this.lengthData / this.elementsOnPage;
     this.listNumPage = [];
     for (let i = 1; i <= this.pageNumber; i++) {
@@ -58,7 +59,7 @@ export class OperationItemListComponent implements OnInit {
 
   updateCurrentPageData() {
     this.currentPageData = [];
-    this.currentPageData = this.data.splice(this.elementsOnPage * (this.currentPage - 1), this.elementsOnPage-1);
+    this.currentPageData = this.data.splice(this.elementsOnPage * (this.currentPage - 1), this.elementsOnPage - 1);
   }
 
 }

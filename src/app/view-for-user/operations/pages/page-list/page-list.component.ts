@@ -7,7 +7,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 })
 export class PageListComponent implements OnInit {
 
- private _listNumPage:number[];
+ _listNumPage:number[];
   @Input() set listNumPage (val: number[]){
     console.dir('Change count page: ' + val.length);
     this._listNumPage = val;

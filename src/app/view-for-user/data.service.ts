@@ -11,11 +11,11 @@ export class DataService {
   constructor(private asyncDataService: AsyncDataService) {
   }
 
-  getDataByName(name, callback){
+  getDataByName(name, callback) {
     this.asyncDataService
       .getDataByName(name)
       .subscribe((response: Response) => {
-        this.data =(JSON.parse(
+        this.data = (JSON.parse(
         response.text(), (key, val) => {
           if (key === 'time'){
 
