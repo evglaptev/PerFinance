@@ -22,7 +22,7 @@ export class ViewForUserComponent implements OnInit {
   isOperationListView: boolean;
   ngOnInit(): void {
     this.isTimePeriodView = false;
-    this.isOperationListView = false;
+    this.isOperationListView = true;
     this.dataService.getDataForCurrentUser();
   }
 
@@ -31,6 +31,7 @@ export class ViewForUserComponent implements OnInit {
 
 
   onCategoryClick() {
+    console.dir('Click on Category');
     this.isTimePeriodView = false;
     this.isOperationListView = true;
   }

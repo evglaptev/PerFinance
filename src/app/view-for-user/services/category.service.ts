@@ -15,8 +15,12 @@ export class CategoryService {
     this.namesOfCategories = [
       {id: Category.AZS, name: 'AZS'},
       {id: Category.Health, name: 'Health'},
-      {id: Category.Food, name: 'Food'}
+      {id: Category.Food, name: 'Food'},
+      {id: Category.ALL, name: 'ALL'}
     ];
+    this.currentCategory = this.namesOfCategories.find(item => {
+      return item.id === Category.ALL;
+    });
     this.subject = new Subject();
   }
 
@@ -36,11 +40,14 @@ export class CategoryService {
           return currentCategory.id === elem.id;
         }))
       console.dir('Selected category not exist in categoryName[]');
+    let data = this.dataService.getDataForCurrentUser();
     this.currentCategory = currentCategory;
-    this.subject.next(this.dataService.getDataForCurrentUser()
-      .filter((item: IOperationsData) => {
-        return this.currentCategory.id === item.type;
-      }));
+    this.subject.next(
+      (this.currentCategory.id === Category.ALL) ? data :
+        data
+          .filter((item: IOperationsData) => {
+            return this.currentCategory.id === item.type;
+          }));
   }
 
   getCategoryNameList(): ICategoryName[] {
@@ -50,6 +57,4 @@ export class CategoryService {
     }
     return this.namesOfCategories;
   }
-
-
 }

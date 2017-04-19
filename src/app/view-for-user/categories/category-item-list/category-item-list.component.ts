@@ -23,8 +23,8 @@ export class CategoryItemListComponent implements OnInit {
 
   setFilter(category:ICategoryName) {
     console.dir("Select category ----" + category.name);
-    this.categoryService.setCurrentCategory(category);
     this.changeCategory.emit();
+    this.categoryService.setCurrentCategory(category);
   }
 
   isActive(id) {

@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {CategoryService} from '../../services/category.service';
 import {IOperationsData} from '../../shared/ioperations-data';
+import {Category} from '../../constants/category.enum';
 
 @Component({
   selector: 'app-operation-item-list',
@@ -12,7 +13,7 @@ export class OperationItemListComponent implements OnInit {
   data: IOperationsData[];
 
 
-  currentPageIsDone = false;
+  isVisible = false;
   currentPageData: IOperationsData[];
   currentPage: number;
   lengthData: number;
@@ -24,8 +25,9 @@ export class OperationItemListComponent implements OnInit {
     this.categoryService.getOperationsListForCurrentCategory().subscribe(val => {
       this.data = val;
 
-     // this.updateListNumPage();
+      this.updateListNumPage();
       this.updateCurrentPageData();
+      this.isVisible = true;
       console.dir('run constructor operationsData');
 
       console.dir(this.data);
@@ -55,7 +57,7 @@ export class OperationItemListComponent implements OnInit {
 
   updateCurrentPageData() {
     this.currentPageData = this.data.splice(this.elementsOnPage * (this.currentPage - 1), this.elementsOnPage - 1);
-    this.currentPageIsDone = typeof this.currentPageData !== 'undefined';
+
   }
 
 }
