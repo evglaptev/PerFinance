@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {IData} from '../../shared/idata';
-import {isNumber} from 'util';
-import {ICategoriesName} from '../../shared/icategories-name';
+import {CategoryService} from '../../services/category.service';
+import {IOperationsData} from '../../shared/ioperations-data';
 
 @Component({
   selector: 'app-operation-item-list',
@@ -10,27 +9,27 @@ import {ICategoriesName} from '../../shared/icategories-name';
 })
 export class OperationItemListComponent implements OnInit {
 
-  _data: IData[];
-  get data(): IData[] {
-    return this._data;
-  }
-  @Input() set data(value: IData[]) {
-    this._data = value;
-    this.updateListNumPage();
-    this.updateCurrentPageData();
-  }
-
-@Input() categoriesName: ICategoriesName[];
+  data: IOperationsData[];
 
 
-  currentPageData: IData[];
+  currentPageIsDone = false;
+  currentPageData: IOperationsData[];
   currentPage: number;
   lengthData: number;
   elementsOnPage: number;
   pageNumber: number;
   listNumPage: number[];
 
-  constructor() {
+  constructor(private categoryService: CategoryService) {
+    this.categoryService.getOperationsListForCurrentCategory().subscribe(val => {
+      this.data = val;
+
+     // this.updateListNumPage();
+      this.updateCurrentPageData();
+      console.dir('run constructor operationsData');
+
+      console.dir(this.data);
+    });
   }
 
   changePage(numPage) {
@@ -38,7 +37,8 @@ export class OperationItemListComponent implements OnInit {
     this.updateCurrentPageData();
 
   }
-  updateListNumPage(){
+
+  updateListNumPage() {
     this.lengthData = this.data.length;
     console.dir('length filtered data: ' + this.lengthData);
     this.pageNumber = this.lengthData / this.elementsOnPage;
@@ -51,13 +51,11 @@ export class OperationItemListComponent implements OnInit {
   ngOnInit() {
     this.currentPage = 1;
     this.elementsOnPage = 8;
-    this.updateListNumPage();
-    this.updateCurrentPageData();
   }
 
   updateCurrentPageData() {
-    this.currentPageData = [];
     this.currentPageData = this.data.splice(this.elementsOnPage * (this.currentPage - 1), this.elementsOnPage - 1);
+    this.currentPageIsDone = typeof this.currentPageData !== 'undefined';
   }
 
 }

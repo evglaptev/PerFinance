@@ -2,8 +2,8 @@
 import { Injectable } from '@angular/core';
 import {Http, Response} from '@angular/http';
 import 'rxjs/add/operator/map';
-import {IData} from 'app/view-for-user/shared/idata';
 import {Observable} from 'rxjs';
+import {IOperationsData} from './shared/ioperations-data';
 
 @Injectable()
 export class AsyncDataService {
@@ -13,10 +13,10 @@ export class AsyncDataService {
 
   }
 
-  getDataByName(name: string): Observable<IData[]> {
+  getDataByName(name: string): Observable<IOperationsData[]> {
     return this.http.get(`${this.BASE_URL}?userName=${name}`)
       .map((response: Response) => response.text())
-      .map((data : string) => {
+      .map((data: string) => {
         return JSON.parse(data, (key, val) => {
           if (key === 'time') {
             return new Date(Date.parse(val));

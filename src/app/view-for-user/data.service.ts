@@ -1,20 +1,25 @@
 import { Injectable } from '@angular/core';
 import {AsyncDataService} from './async-data.service';
-import {IData} from './shared/idata';
+import {IOperationsData} from './shared/ioperations-data';
 import {Response} from '@angular/http';
 
 @Injectable()
 export class DataService {
-
-  data: IData[];
+  isActual = false;
+  data: IOperationsData[];
+  name: 'Александр';
 
   constructor(private asyncDataService: AsyncDataService) {
   }
 
-  getDataByName(name) {
-    this.asyncDataService
-      .getDataByName(name)
-      .subscribe(data => this.data = data);
+  getDataForCurrentUser() {
+    if (!this.isActual) {
+      this.asyncDataService
+        .getDataByName(this.name)
+        .subscribe(data => this.data = data);
+      this.isActual = true;
+    }
+    return this.data;
 
   }
 }

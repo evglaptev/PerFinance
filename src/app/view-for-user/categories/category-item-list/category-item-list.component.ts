@@ -1,29 +1,30 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Category} from '../../constants/category.enum';
-import {ICategoriesName} from "../../shared/icategories-name";
+import {CategoryService} from '../../services/category.service';
+import {ICategoryName} from '../../shared/icategory-name';
 
 @Component({
   selector: 'app-category-item-list',
   templateUrl: './category-item-list.component.html',
   styleUrls: ['./category-item-list.component.css']
 })
+
 export class CategoryItemListComponent implements OnInit {
-  @Input() categoriesName: ICategoriesName[];
-  @Input() currentCategory: Category;
-  @Output() categoryChange = new EventEmitter();
+  @Output() changeCategory = new EventEmitter();
+  categoryListName: ICategoryName[];
 
 
-
-
-  constructor() {
+  constructor(private categoryService: CategoryService) {
   }
 
   ngOnInit() {
+    this.categoryListName = this.categoryService.getCategoryNameList();
   }
 
 
-  setFilter(id) {
-    this.categoryChange.emit(id);
+  setFilter(category:ICategoryName) {
+    console.dir("Select category ----" + category.name);
+    this.categoryService.setCurrentCategory(category);
+    this.changeCategory.emit();
   }
 
   isActive(id) {

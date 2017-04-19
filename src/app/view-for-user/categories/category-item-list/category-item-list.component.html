@@ -1,11 +1,11 @@
 
 <ul class="category__list">
-  <li *ngFor="let item of categoriesName">
+  <li *ngFor="let item of categoryListName">
     <div
       class="filters__item"
-      [class.filters__item_selected]="isActive(item.id)"
-      (click)="setFilter(item.id)">
-      {{item.value}}
+      [class.filters__item_selected]="isActive(item)"
+      (click)="setFilter(item)">
+      {{item.name}}
     </div>
 
   </li>

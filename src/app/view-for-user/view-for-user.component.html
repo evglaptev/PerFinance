@@ -3,15 +3,11 @@
   <app-period-item-list (onTimePeriodChange) = "onTimePeriodChange($event)" ></app-period-item-list>
 </div>
 <div class="category__list">
-<app-category-item-list
-  [currentCategory]="currentCategory"
-  (categoryChange) = "onCategoryChange($event)"
-  [categoriesName]="categoriesName"
->
+<app-category-item-list (changeCategory)="onCategoryClick()"  >
 </app-category-item-list>
 </div>
 <div *ngIf="isOperationListView" class="operation__list">
-<app-operation-item-list [data]="forViewData" [categoriesName]="categoriesName" >
+<app-operation-item-list >
 </app-operation-item-list>
 </div>
 

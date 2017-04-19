@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {IData} from '../shared/idata';
 import {Category} from '../constants/category.enum';
 import {ITimePeriod} from "app/view-for-user/itime-period";
+import {IOperationsData} from '../shared/ioperations-data';
 
 @Component({
   selector: 'app-static-of-period',
@@ -11,8 +11,8 @@ import {ITimePeriod} from "app/view-for-user/itime-period";
 export class StaticOfPeriodComponent implements OnInit {
 
   _timePeriod: ITimePeriod;
-  _data: IData[];
-  periodData: IData[];
+  _data: IOperationsData[];
+  periodData: IOperationsData[];
   pieChartLabels: string[] = ['AZS', 'Food', 'Health'];
   pieChartData: number[];
 
@@ -26,12 +26,12 @@ export class StaticOfPeriodComponent implements OnInit {
     this.update();
   }
 
-  get data(): IData[] {
+  get data(): IOperationsData[] {
     return this._data;
   }
 
   @Input('data')
-  set data(value: IData[]) {{
+  set data(value: IOperationsData[]) {{
       this._data = value;
       this.update();
     }

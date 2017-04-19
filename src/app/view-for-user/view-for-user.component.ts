@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {DataService} from './data.service';
-import {IData} from './shared/idata';
+import {IOperationsData} from './shared/ioperations-data';
 import {Category} from './constants/category.enum';
 import {ITimePeriod} from './itime-period';
-import {ICategoriesName} from "./shared/icategories-name";
 
 @Component({
   selector: 'app-view-for-user',
@@ -14,43 +13,26 @@ import {ICategoriesName} from "./shared/icategories-name";
 
 
 
-export class ViewForUserComponent implements OnInit{
+export class ViewForUserComponent implements OnInit {
 
 
-  forViewData: IData[];
-  data: IData[];
-  currentCategory: Category = Category.ALL;
+  data: IOperationsData[];
   currentTimePeriod: ITimePeriod;
   isTimePeriodView: boolean;
   isOperationListView: boolean;
-  categoriesName: ICategoriesName[] =
-  [
-    {id: Category.AZS, name: 'AZS'},
-    {id: Category.Health, name: 'Health'},
-    {id: Category.Food, name: 'Food'}
-
-  ];
   ngOnInit(): void {
     this.isTimePeriodView = false;
     this.isOperationListView = false;
-    this.dataService.getDataByName('Вася');
+    this.dataService.getDataForCurrentUser();
   }
 
   constructor(private dataService: DataService) {
   }
 
 
-  onCategoryChange(currentCategory: Category) {
-    if (
-      this.currentCategory === currentCategory && this.isOperationListView === true
-    ) return;
-
-    this.currentCategory = currentCategory;
+  onCategoryClick() {
     this.isTimePeriodView = false;
     this.isOperationListView = true;
-    this.update();
-    // меняем текущую категорию
-
   }
 
 
@@ -61,17 +43,7 @@ export class ViewForUserComponent implements OnInit{
   }
 
 
-  update() {
-    if (this.currentCategory === Category.ALL) {
 
-      this.forViewData = this.data;
-      return;
-    }
-    this.forViewData = this.data.filter(val => {
-      if (val.type === this.currentCategory) return true;
-      return false;
-    });
-  }
 
 
 }
