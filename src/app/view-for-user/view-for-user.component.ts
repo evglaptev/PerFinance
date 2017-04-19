@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DataService} from './data.service';
 import {IData} from './shared/idata';
 import {Category} from './constants/category.enum';
@@ -14,7 +14,9 @@ import {ICategoriesName} from "./shared/icategories-name";
 
 
 
-export class ViewForUserComponent {
+export class ViewForUserComponent implements OnInit{
+
+
   forViewData: IData[];
   data: IData[];
   currentCategory: Category = Category.ALL;
@@ -28,14 +30,13 @@ export class ViewForUserComponent {
     {id: Category.Food, name: 'Food'}
 
   ];
-
-
-  constructor(private dataService: DataService) {
+  ngOnInit(): void {
     this.isTimePeriodView = false;
     this.isOperationListView = false;
-    dataService.getDataByName('Вася', val => {
-      this.data = val;
-    });
+    this.dataService.getDataByName('Вася');
+  }
+
+  constructor(private dataService: DataService) {
   }
 
 

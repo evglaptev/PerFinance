@@ -11,22 +11,12 @@ export class DataService {
   constructor(private asyncDataService: AsyncDataService) {
   }
 
-  getDataByName(name, callback) {
+  getDataByName(name) {
     this.asyncDataService
       .getDataByName(name)
-      .subscribe((response: Response) => {
-        this.data = (JSON.parse(
-        response.text(), (key, val) => {
-          if (key === 'time'){
+      .subscribe(data => this.data = data);
 
-            return new Date(Date.parse(val));
-          }
-            return val;
-        }
-      ));
-        callback(this.data);
-
-      });
   }
-
 }
+
+

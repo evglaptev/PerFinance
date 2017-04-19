@@ -50,9 +50,7 @@ export class OperationItemListComponent implements OnInit {
 
   ngOnInit() {
     this.currentPage = 1;
-
     this.elementsOnPage = 8;
-
     this.updateListNumPage();
     this.updateCurrentPageData();
   }
