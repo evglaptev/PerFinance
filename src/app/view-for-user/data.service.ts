@@ -1,32 +1,24 @@
 import { Injectable } from '@angular/core';
 import {AsyncDataService} from './async-data.service';
-import {IData} from './shared/idata';
+import {IOperationsData} from './shared/ioperations-data';
 import {Response} from '@angular/http';
 
 @Injectable()
 export class DataService {
-
-  data: IData[];
+  data: IOperationsData[];
+  name= 'Александр';
 
   constructor(private asyncDataService: AsyncDataService) {
-  }
-
-  getDataByName(name, callback){
     this.asyncDataService
-      .getDataByName(name)
-      .subscribe((response: Response) => {
-        this.data =(JSON.parse(
-        response.text(), (key, val) => {
-          if (key === 'time'){
-
-            return new Date(Date.parse(val));
-          }
-            return val;
-        }
-      ));
-        callback(this.data);
-
-      });
+    .getDataByName(this.name)
+    .subscribe(data => this.data = data,err=>console.dir('API Error '+err));
   }
 
+  getDataForCurrentUser() {
+    console.dir(this.data);
+    return this.data;
+
+  }
 }
+
+

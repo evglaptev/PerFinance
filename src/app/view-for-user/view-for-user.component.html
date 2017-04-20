@@ -1,17 +1,18 @@
 <div class="period__list">
 
-  <app-period-item-list (onTimePeriodChange) = "onTimePeriodChange($event)" ></app-period-item-list>
+  <app-period-item-list (onTimePeriodChange) = "onTimePeriodChange()" ></app-period-item-list>
 </div>
 <div class="category__list">
-<app-category-item-list [currentCategory]="currentCategory" (categoryChange) = "onCategoryChange($event)"></app-category-item-list>
+<app-category-item-list (changeCategory)="onCategoryClick()"  >
+</app-category-item-list>
 </div>
 <div *ngIf="isOperationListView" class="operation__list">
-<app-operation-item-list [data]="forViewData" >
+<app-operation-item-list >
 </app-operation-item-list>
 </div>
 
 <div *ngIf="isTimePeriodView" class="static__of__period">
-  <app-static-of-period [currentTimePeriod]="currentTimePeriod"  [data]="data">
+  <app-static-of-period>
   </app-static-of-period>
 </div>
 

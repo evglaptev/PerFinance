@@ -1,57 +1,27 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {IData} from '../shared/idata';
 import {Category} from '../constants/category.enum';
 import {ITimePeriod} from "app/view-for-user/itime-period";
+import {IOperationsData} from '../shared/ioperations-data';
+import {PeriodService} from "../services/period.service";
+import {CategoryService} from "../services/category.service";
 
 @Component({
   selector: 'app-static-of-period',
   templateUrl: './static-of-period.component.html',
   styleUrls: ['./static-of-period.component.css']
 })
-export class StaticOfPeriodComponent implements OnInit {
+export class StaticOfPeriodComponent {
 
-  _timePeriod: ITimePeriod;
-  _data: IData[];
-  periodData: IData[];
-  pieChartLabels: string[] = ['AZS', 'Food', 'Health'];
-  pieChartData: number[];
-
-  get currentTimePeriod(): ITimePeriod {
-    return this._timePeriod;
-  }
-
-  @Input('currentTimePeriod')
-  set timePeriod(value: ITimePeriod) {
-    this._timePeriod = value;
-    this.update();
-  }
-
-  get data(): IData[] {
-    return this._data;
-  }
-
-  @Input('data')
-  set data(value: IData[]) {{
-      this._data = value;
-      this.update();
-    }
-  }
-
+  pieChartLabels: string[];
+  pieChartData: number[] = [];
+  periodData: IOperationsData[];
   categoryList: {
     length: 0,
   };
 
   update() {
 
-    if (typeof this.data === 'undefined') return;
-      this.periodData = this.data.filter(item => {
-
-      return (
-        item.time.getTime() >= this.currentTimePeriod.from.getTime()
-        && item.time.getTime() <= this.currentTimePeriod.to.getTime()
-      );
-    });
-
+    console.dir('update staticPeriod');
     this.clear();
     this.periodData.forEach(item => {
       this.incPriceForCategory(item.type, item.price);
@@ -79,21 +49,27 @@ export class StaticOfPeriodComponent implements OnInit {
     console.dir(cat + ' is ' + this.categoryList[cat]);
   };
 
-  getCategoryList() {
-    return this.categoryList;
-  };
-
   clear() {
     this.categoryList = {
       length: 0
     };
   };
 
-  constructor() {
-  }
+  constructor(private periodService: PeriodService, private categoryService: CategoryService) {
+    this.periodService.getCurrentPeriodData()
+      .subscribe((data: IOperationsData[]) => {
+        this.periodData = data;
+        this.update();
+      });
+    this.periodService.update();
+    this.pieChartLabels=this.categoryService.getCategoryNameList()
+      .filter(item => {
+        return item.id !== Category.ALL;
+      })
+      .map(item => {
+        return item.name;
+      });
 
-  ngOnInit() {
-    this.update();
   }
-
 }
+

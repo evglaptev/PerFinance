@@ -1,8 +1,4 @@
-import { Component } from '@angular/core';
-import {DataService} from './data.service';
-import {IData} from './shared/idata';
-import {Category} from './constants/category.enum';
-import {ITimePeriod} from './itime-period';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-view-for-user',
@@ -10,58 +6,24 @@ import {ITimePeriod} from './itime-period';
   styleUrls: ['./view-for-user.component.css']
 })
 
+export class ViewForUserComponent implements OnInit {
+  isTimePeriodView = false;
+  isOperationListView = false;
 
-
-
-export class ViewForUserComponent {
-  forViewData: IData[];
-  data: IData[];
-  currentCategory: Category = Category.ALL;
-  currentTimePeriod: ITimePeriod;
-  isTimePeriodView: boolean;
-  isOperationListView: boolean;
-
-  constructor(private dataService: DataService) {
-    this.isTimePeriodView = false;
-    this.isOperationListView = false;
-    dataService.getDataByName('Вася', val => {
-      this.data = val;
-    });
+  ngOnInit(): void {
   }
 
+  constructor() {
+  }
 
-  onCategoryChange(currentCategory: Category) {
-    if (
-      this.currentCategory === currentCategory && this.isOperationListView === true
-    ) return;
-
-    this.currentCategory = currentCategory;
+  onCategoryClick() {
+    console.dir('Click on Category');
     this.isTimePeriodView = false;
     this.isOperationListView = true;
-    this.update();
-    // меняем текущую категорию
-
   }
 
-
-  onTimePeriodChange(timePeriod: ITimePeriod) {
-   this.currentTimePeriod = timePeriod;
+  onTimePeriodChange() {
     this.isOperationListView = false;
     this.isTimePeriodView = true;
   }
-
-
-  update() {
-    if (this.currentCategory === Category.ALL) {
-
-      this.forViewData = this.data;
-      return;
-    }
-    this.forViewData = this.data.filter(val => {
-      if (val.type === this.currentCategory) return true;
-      return false;
-    });
-  }
-
-
 }

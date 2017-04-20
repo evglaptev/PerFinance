@@ -16,6 +16,8 @@ import { PageListComponent } from './view-for-user/operations/pages/page-list/pa
 import { LogInComponent } from './log-in/log-in.component';
 import { ViewForUserComponent } from './view-for-user/view-for-user.component';
 import { PieComponent } from './view-for-user/static-of-period/pie/pie.component';
+import {CategoryService} from './view-for-user/services/category.service';
+import {PeriodService} from './view-for-user/services/period.service';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,8 @@ import { PieComponent } from './view-for-user/static-of-period/pie/pie.component
     HttpModule,
     ChartsModule
   ],
-  providers: [AsyncDataService, DataService],
+  providers: [AsyncDataService, DataService, CategoryService, PeriodService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

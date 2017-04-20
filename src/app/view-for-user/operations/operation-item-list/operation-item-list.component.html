@@ -1,5 +1,9 @@
-<ul>
-  <li *ngFor="let item of currentPageData" > <app-operation-item [item]="item"></app-operation-item></li>
+
+
+<ul >
+  <li *ngFor="let item of currentPageData" >
+    <app-operation-item [item]="item"></app-operation-item>
+  </li>
 </ul>
 
 <app-page-list (onClickPage) = "changePage($event)" [listNumPage]="listNumPage" > </app-page-list>

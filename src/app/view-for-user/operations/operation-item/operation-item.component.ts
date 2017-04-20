@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {IData} from '../../shared/idata';
+import {IOperationsData} from '../../shared/ioperations-data';
 
 @Component({
   selector: 'app-operation-item',
@@ -7,7 +7,7 @@ import {IData} from '../../shared/idata';
   styleUrls: ['./operation-item.component.css']
 })
 export class OperationItemComponent implements OnInit {
-@Input() item : IData;
+@Input() item : IOperationsData;
   constructor() { }
 
 
