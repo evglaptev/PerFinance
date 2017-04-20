@@ -40,8 +40,13 @@ export class CategoryService {
           return currentCategory.id === elem.id;
         }))
       console.dir('Selected category not exist in categoryName[]');
-    let data = this.dataService.getDataForCurrentUser();
+
     this.currentCategory = currentCategory;
+    this.update();
+  }
+
+  update() {
+    let data = this.dataService.getDataForCurrentUser();
     this.subject.next(
       (this.currentCategory.id === Category.ALL) ? data :
         data

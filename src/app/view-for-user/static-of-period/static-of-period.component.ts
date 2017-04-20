@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Category} from '../constants/category.enum';
 import {ITimePeriod} from "app/view-for-user/itime-period";
 import {IOperationsData} from '../shared/ioperations-data';
+import {PeriodService} from "../services/period.service";
 
 @Component({
   selector: 'app-static-of-period',
@@ -10,48 +11,16 @@ import {IOperationsData} from '../shared/ioperations-data';
 })
 export class StaticOfPeriodComponent implements OnInit {
 
-  _timePeriod: ITimePeriod;
-  _data: IOperationsData[];
-  periodData: IOperationsData[];
   pieChartLabels: string[] = ['AZS', 'Food', 'Health'];
-  pieChartData: number[];
-
-  get currentTimePeriod(): ITimePeriod {
-    return this._timePeriod;
-  }
-
-  @Input('currentTimePeriod')
-  set timePeriod(value: ITimePeriod) {
-    this._timePeriod = value;
-    this.update();
-  }
-
-  get data(): IOperationsData[] {
-    return this._data;
-  }
-
-  @Input('data')
-  set data(value: IOperationsData[]) {{
-      this._data = value;
-      this.update();
-    }
-  }
-
+  pieChartData: number[]=[];
+  periodData: IOperationsData[];
   categoryList: {
     length: 0,
   };
 
   update() {
 
-    if (typeof this.data === 'undefined') return;
-      this.periodData = this.data.filter(item => {
-
-      return (
-        item.time.getTime() >= this.currentTimePeriod.from.getTime()
-        && item.time.getTime() <= this.currentTimePeriod.to.getTime()
-      );
-    });
-
+console.dir('update staticPeriod');
     this.clear();
     this.periodData.forEach(item => {
       this.incPriceForCategory(item.type, item.price);
@@ -89,11 +58,16 @@ export class StaticOfPeriodComponent implements OnInit {
     };
   };
 
-  constructor() {
+  constructor(private periodService: PeriodService) {
+    this.periodService.getCurrentPeriodData()
+      .subscribe((data: IOperationsData[]) => {
+        this.periodData = data;
+        this.update();
+      });
+    this.periodService.update();
   }
 
   ngOnInit() {
-    this.update();
   }
 
 }

@@ -11,16 +11,26 @@ export class PieComponent implements OnInit {
   _pieChartData: number[] ;
   sumPrice:number;
   pieChartType: string = 'pie';
+  isVisible=false;
   get pieChartData(): number[] {
+
     return this._pieChartData;
   }
 
   @Input('pieChartData')
   set pieChartData(value: number[]) {
-    this.sumPrice = value.reduce((previousValue,currentValue)=>{
-      return previousValue+currentValue;
-    })
-    this._pieChartData = value;
+    console.dir('Set pieChartData property');
+    console.dir(value);
+    if (value.length>0) {
+      this.isVisible=true;
+      this.sumPrice = value.reduce((previousValue, currentValue) => {
+        return previousValue + currentValue;
+      })
+      this._pieChartData = value;
+    }
+    else {
+      this.isVisible=false;
+    }
   };
 
 @Input() currentTimePeriod:ITimePeriod;

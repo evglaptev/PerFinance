@@ -1,7 +1,4 @@
-<div>
-  <div class="time__period">
-<p>Траты c {{currentTimePeriod.from.toDateString()}} по {{currentTimePeriod.to.toDateString()}}</p>
-  </div>
+<div *ngIf="isVisible">
 <div class="pie" >
   <canvas baseChart
           [data]="pieChartData"

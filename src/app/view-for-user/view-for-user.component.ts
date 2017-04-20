@@ -22,7 +22,7 @@ export class ViewForUserComponent implements OnInit {
   isOperationListView: boolean;
   ngOnInit(): void {
     this.isTimePeriodView = false;
-    this.isOperationListView = true;
+    this.isOperationListView = false;
     this.dataService.getDataForCurrentUser();
   }
 
@@ -37,8 +37,7 @@ export class ViewForUserComponent implements OnInit {
   }
 
 
-  onTimePeriodChange(timePeriod: ITimePeriod) {
-   this.currentTimePeriod = timePeriod;
+  onTimePeriodChange() {
     this.isOperationListView = false;
     this.isTimePeriodView = true;
   }
