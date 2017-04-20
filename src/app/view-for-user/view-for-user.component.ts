@@ -1,8 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {DataService} from './data.service';
-import {IOperationsData} from './shared/ioperations-data';
-import {Category} from './constants/category.enum';
-import {ITimePeriod} from './itime-period';
 
 @Component({
   selector: 'app-view-for-user',
@@ -10,25 +6,15 @@ import {ITimePeriod} from './itime-period';
   styleUrls: ['./view-for-user.component.css']
 })
 
-
-
-
 export class ViewForUserComponent implements OnInit {
+  isTimePeriodView = false;
+  isOperationListView = false;
 
-
-  data: IOperationsData[];
-  currentTimePeriod: ITimePeriod;
-  isTimePeriodView: boolean;
-  isOperationListView: boolean;
   ngOnInit(): void {
-    this.isTimePeriodView = false;
-    this.isOperationListView = false;
-    this.dataService.getDataForCurrentUser();
   }
 
-  constructor(private dataService: DataService) {
+  constructor() {
   }
-
 
   onCategoryClick() {
     console.dir('Click on Category');
@@ -36,14 +22,8 @@ export class ViewForUserComponent implements OnInit {
     this.isOperationListView = true;
   }
 
-
   onTimePeriodChange() {
     this.isOperationListView = false;
     this.isTimePeriodView = true;
   }
-
-
-
-
-
 }

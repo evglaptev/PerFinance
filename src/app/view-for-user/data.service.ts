@@ -5,20 +5,17 @@ import {Response} from '@angular/http';
 
 @Injectable()
 export class DataService {
-  isActual = false;
   data: IOperationsData[];
-  name: 'Александр';
+  name= 'Александр';
 
   constructor(private asyncDataService: AsyncDataService) {
+    this.asyncDataService
+    .getDataByName(this.name)
+    .subscribe(data => this.data = data,err=>console.dir('API Error '+err));
   }
 
   getDataForCurrentUser() {
-    if (!this.isActual) {
-      this.asyncDataService
-        .getDataByName(this.name)
-        .subscribe(data => this.data = data);
-      this.isActual = true;
-    }
+    console.dir(this.data);
     return this.data;
 
   }

@@ -3,16 +3,17 @@ import {Category} from '../constants/category.enum';
 import {ITimePeriod} from "app/view-for-user/itime-period";
 import {IOperationsData} from '../shared/ioperations-data';
 import {PeriodService} from "../services/period.service";
+import {CategoryService} from "../services/category.service";
 
 @Component({
   selector: 'app-static-of-period',
   templateUrl: './static-of-period.component.html',
   styleUrls: ['./static-of-period.component.css']
 })
-export class StaticOfPeriodComponent implements OnInit {
+export class StaticOfPeriodComponent {
 
-  pieChartLabels: string[] = ['AZS', 'Food', 'Health'];
-  pieChartData: number[]=[];
+  pieChartLabels: string[];
+  pieChartData: number[] = [];
   periodData: IOperationsData[];
   categoryList: {
     length: 0,
@@ -20,7 +21,7 @@ export class StaticOfPeriodComponent implements OnInit {
 
   update() {
 
-console.dir('update staticPeriod');
+    console.dir('update staticPeriod');
     this.clear();
     this.periodData.forEach(item => {
       this.incPriceForCategory(item.type, item.price);
@@ -48,26 +49,27 @@ console.dir('update staticPeriod');
     console.dir(cat + ' is ' + this.categoryList[cat]);
   };
 
-  getCategoryList() {
-    return this.categoryList;
-  };
-
   clear() {
     this.categoryList = {
       length: 0
     };
   };
 
-  constructor(private periodService: PeriodService) {
+  constructor(private periodService: PeriodService, private categoryService: CategoryService) {
     this.periodService.getCurrentPeriodData()
       .subscribe((data: IOperationsData[]) => {
         this.periodData = data;
         this.update();
       });
     this.periodService.update();
-  }
+    this.pieChartLabels=this.categoryService.getCategoryNameList()
+      .filter(item => {
+        return item.id !== Category.ALL;
+      })
+      .map(item => {
+        return item.name;
+      });
 
-  ngOnInit() {
   }
-
 }
+
