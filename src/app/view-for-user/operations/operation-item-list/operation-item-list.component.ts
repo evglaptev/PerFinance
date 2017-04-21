@@ -35,7 +35,7 @@ export class OperationItemListComponent implements OnInit {
       console.dir('Filtered data:');
       console.dir(this.data);
     });
-    this.categoryService.update();  // Чтобы при инициализации компоненты событие повторилось, когда совершена подписка
+    //this.categoryService.update();  // Чтобы при инициализации компоненты событие повторилось, когда совершена подписка
   }
 
   changePage(numPage) {

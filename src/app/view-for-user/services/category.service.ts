@@ -10,7 +10,6 @@ export class CategoryService {
   currentCategory: ICategoryName;
   namesOfCategories: ICategoryName[];
   subject: Subject<IOperationsData[]>;
-
   constructor(private dataService: DataService) {
     this.namesOfCategories = [
       {id: Category.AZS, name: 'AZS'},
@@ -42,17 +41,16 @@ export class CategoryService {
       console.dir('Selected category not exist in categoryName[]');
 
     this.currentCategory = currentCategory;
-    this.update();
-  }
+    this.dataService.getDataForCurrentUser()
+      .subscribe(data => {
+        this.subject.next(
+          (this.currentCategory.id === Category.ALL) ? data :
+            data
+              .filter((item: IOperationsData) => {
+                return this.currentCategory.id === item.type;
+              }));
+      });
 
-  update() {
-    let data = this.dataService.getDataForCurrentUser();
-    this.subject.next(
-      (this.currentCategory.id === Category.ALL) ? data :
-        data
-          .filter((item: IOperationsData) => {
-            return this.currentCategory.id === item.type;
-          }));
   }
 
   getCategoryNameList(): ICategoryName[] {

@@ -21,11 +21,13 @@ export class PeriodService {
 
   private updateData() {
     console.dir(this.periodData);
-    this.periodData = this.dataService.getDataForCurrentUser().filter(item => {
-      return (
-        item.time.getTime() >= this.timePeriod.from.getTime()
-        && item.time.getTime() <= this.timePeriod.to.getTime()
-      );
+     this.dataService.getDataForCurrentUser().subscribe(val => {
+      this.periodData = val.filter(item => {
+        return (
+          item.time.getTime() >= this.timePeriod.from.getTime()
+          && item.time.getTime() <= this.timePeriod.to.getTime()
+        );
+      });
     });
     this.subject.next(this.periodData);
     console.dir('Произошло событие с');
