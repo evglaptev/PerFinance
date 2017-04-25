@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'app-view-for-user',
-  templateUrl: './view-for-user.component.html',
-  styleUrls: ['./view-for-user.component.css']
+  selector: 'app-main',
+  templateUrl: './main.component.html',
+  styleUrls: ['./main.component.css']
 })
 
-export class ViewForUserComponent implements OnInit {
+export class MainComponent implements OnInit {
   isTimePeriodView = false;
   isOperationListView = false;
 

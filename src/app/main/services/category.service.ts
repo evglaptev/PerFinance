@@ -3,7 +3,7 @@ import {DataService} from '../data.service';
 import {ICategoryName} from '../shared/icategory-name';
 import {IOperationsData} from '../shared/ioperations-data';
 import {Category} from '../constants/category.enum';
-import {Subject} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 
 @Injectable()
 export class CategoryService {
@@ -23,13 +23,13 @@ export class CategoryService {
     this.subject = new Subject();
   }
 
-  getOperationsListForCurrentCategory(): Subject<IOperationsData[]> {
+  getOperationsListForCurrentCategory(): Observable<IOperationsData[]> {
     if (typeof this.currentCategory === 'undefined') {
       console.dir('currentCategory is empty!');
       return null;
     }
     console.dir('returned subject getOperListForCurCat');
-    return this.subject;
+    return this.subject.asObservable();
   }
 
 

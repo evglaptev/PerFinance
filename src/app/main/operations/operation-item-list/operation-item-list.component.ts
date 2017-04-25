@@ -15,26 +15,14 @@ export class OperationItemListComponent implements OnInit {
 
   isVisible = true;
   currentPageData: IOperationsData[];
-  currentPage: number;
+  currentPage=1;
   lengthData: number;
-  elementsOnPage: number;
+  elementsOnPage=8;
   pageNumber: number;
   listNumPage: number[];
 
   constructor(private categoryService: CategoryService) {
-    this.currentPage = 1;
-    this.elementsOnPage = 8;
-    console.dir('Operation list init');
-    console.dir('run constructor operationsData');
-    this.categoryService.getOperationsListForCurrentCategory().subscribe(val => {
-      this.data = val;
 
-      this.updateListNumPage();
-      this.updateCurrentPageData();
-      this.isVisible = true;
-      console.dir('Filtered data:');
-      console.dir(this.data);
-    });
     //this.categoryService.update();  // Чтобы при инициализации компоненты событие повторилось, когда совершена подписка
   }
 
@@ -56,6 +44,17 @@ export class OperationItemListComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.dir('Operation list init');
+    console.dir('run constructor operationsData');
+    this.categoryService.getOperationsListForCurrentCategory().subscribe(val => {
+      this.data = val;
+
+      this.updateListNumPage();
+      this.updateCurrentPageData();
+      this.isVisible = true;
+      console.dir('Filtered data:');
+      console.dir(this.data);
+    });
   }
 
   updateCurrentPageData() {

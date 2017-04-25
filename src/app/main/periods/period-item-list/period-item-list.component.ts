@@ -31,9 +31,10 @@ export class PeriodItemListComponent implements OnInit {
   }
 
   changePeriod(period: ITimePeriod) {
-    this.onTimePeriodChange.emit();
-    console.dir(period);
+
+    console.dir('Период' +period);
     this.periodService.setCurrentPeriod(period);
+    this.onTimePeriodChange.emit();
   }
 
 }

@@ -7,31 +7,40 @@ import {ITimePeriod} from "../../itime-period";
   styleUrls: ['./pie.component.css']
 })
 export class PieComponent implements OnInit {
-  @Input() pieChartLabels: string[];
+  isLabelsDone=false;
+  isDataDone=false;
   _pieChartData: number[] ;
-  sumPrice:number;
-  pieChartType: string = 'pie';
-  isVisible=false;
-  get pieChartData(): number[] {
+  sumPrice: number;
+  pieChartType = 'pie';
 
+  _pieChartLabels:string[];
+  @Input('pieChartLabels')
+  set pieChartLabels(value: string[]) {
+    if (value.length>0) {
+      this._pieChartLabels = value;
+      this.isLabelsDone=true;
+    }
+  }
+  get pieChartLabels(): string[] {
+  return this._pieChartLabels;
+}
+
+  get pieChartData(): number[] {
     return this._pieChartData;
   }
 
   @Input('pieChartData')
   set pieChartData(value: number[]) {
-    console.dir('Set pieChartData property');
-    console.dir(value);
-    if (value.length>0) {
-      this.isVisible=true;
+    if(value.length>0) {
+      console.dir('Set pieChartData property');
+      console.dir(value);
       this.sumPrice = value.reduce((previousValue, currentValue) => {
         return previousValue + currentValue;
       })
       this._pieChartData = value;
+      this.isDataDone=true;
     }
-    else {
-      this.isVisible=false;
-    }
-  };
+    };
 
 @Input() currentTimePeriod:ITimePeriod;
 
@@ -39,7 +48,7 @@ export class PieComponent implements OnInit {
   }
 
   ngOnInit() {
-
+console.dir('pipe init');
   }
 
 
