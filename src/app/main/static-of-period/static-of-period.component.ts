@@ -19,15 +19,19 @@ export class StaticOfPeriodComponent implements OnInit{
 
     this.groupService.getGroupList().subscribe(data => {
 
+      this.chartIsVisible=false;
       console.dir('update static-of-period');
       console.dir(data);
+
       this.pieChartLabels = data.map(item => {
         return item.name;
       });
       this.pieChartData = data.map(item => {
+        console.dir('data');
         return item.price;
       });
-      this.chartIsVisible=true;
+
+      setTimeout((()=>this.chartIsVisible = true),100);
       console.dir(this.pieChartLabels);
     });
     console.dir('static-of-period init');

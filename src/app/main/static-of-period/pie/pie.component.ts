@@ -7,21 +7,21 @@ import {ITimePeriod} from "../../itime-period";
   styleUrls: ['./pie.component.css']
 })
 export class PieComponent implements OnInit {
-  isLabelsDone=false;
-  isDataDone=false;
   _pieChartData: number[] ;
   sumPrice: number;
-  pieChartType = 'pie';
+  pieChartType = 'doughnut';
+  _pieChartLabels: string[];
 
-  _pieChartLabels:string[];
   @Input('pieChartLabels')
   set pieChartLabels(value: string[]) {
-    if (value.length>0) {
+    console.dir('property labels');
+    console.dir(value);
+
       this._pieChartLabels = value;
-      this.isLabelsDone=true;
-    }
   }
   get pieChartLabels(): string[] {
+    console.dir('getting chartlabels');
+    console.dir(this._pieChartLabels);
   return this._pieChartLabels;
 }
 
@@ -31,15 +31,13 @@ export class PieComponent implements OnInit {
 
   @Input('pieChartData')
   set pieChartData(value: number[]) {
-    if(value.length>0) {
       console.dir('Set pieChartData property');
       console.dir(value);
       this.sumPrice = value.reduce((previousValue, currentValue) => {
         return previousValue + currentValue;
       })
       this._pieChartData = value;
-      this.isDataDone=true;
-    }
+
     };
 
 @Input() currentTimePeriod:ITimePeriod;
