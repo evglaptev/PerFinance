@@ -13,7 +13,6 @@ import {DataService} from './main/data.service';
 import { StaticOfPeriodComponent } from './main/static-of-period/static-of-period.component';
 import { PageListComponent } from './main/operations/pages/page-list/page-list.component';
 import { LogInComponent } from './log-in/log-in.component';
-import { MainComponent } from './main/main.component';
 import { PieComponent } from './main/static-of-period/pie/pie.component';
 import {CategoryService} from './main/services/category.service';
 import {PeriodService} from './main/services/period.service';
@@ -22,6 +21,7 @@ import {AuthGuard} from "./guards/auth.guard";
 import {routing} from "./app.routing";
 import { UserInfoComponent } from './main/user-info/user-info.component';
 import {GroupService} from "./main/services/group.service";
+import { TransferComponent } from './content/transfer/transfer.component';
 
 
 @NgModule({
@@ -34,9 +34,9 @@ import {GroupService} from "./main/services/group.service";
     StaticOfPeriodComponent,
     PageListComponent,
     LogInComponent,
-    MainComponent,
     PieComponent,
-    UserInfoComponent
+    UserInfoComponent,
+    TransferComponent
   ],
   imports: [
     BrowserModule,

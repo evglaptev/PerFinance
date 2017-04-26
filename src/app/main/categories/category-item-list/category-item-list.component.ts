@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CategoryService} from '../../services/category.service';
 import {ICategoryName} from '../../shared/icategory-name';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-category-item-list',
@@ -9,11 +10,10 @@ import {ICategoryName} from '../../shared/icategory-name';
 })
 
 export class CategoryItemListComponent implements OnInit {
-  @Output() changeCategory = new EventEmitter();
   categoryListName: ICategoryName[];
 
 
-  constructor(private categoryService: CategoryService) {
+  constructor(private categoryService: CategoryService, private routing: Router) {
   }
 
   ngOnInit() {
@@ -21,10 +21,10 @@ export class CategoryItemListComponent implements OnInit {
   }
 
 
-  setFilter(category:ICategoryName) {
+  setFilter(category: ICategoryName) {
     console.dir("Select category ----" + category.name);
-    this.changeCategory.emit();
     this.categoryService.setCurrentCategory(category);
+    this.routing.navigate(['category']);
   }
 
   isActive(id) {

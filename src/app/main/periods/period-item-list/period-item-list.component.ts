@@ -1,6 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ITimePeriod} from '../../itime-period';
-import {PeriodService} from "../../services/period.service";
+import {PeriodService} from '../../services/period.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-period-item-list',
@@ -8,7 +9,6 @@ import {PeriodService} from "../../services/period.service";
   styleUrls: ['./period-item-list.component.css']
 })
 export class PeriodItemListComponent implements OnInit {
-  @Output() onTimePeriodChange = new EventEmitter();
   timePeriod: ITimePeriod = {from: new Date(), to: new Date()};
   currentYear: ITimePeriod = {
     from: new Date(new Date().getFullYear(), 0, 1),
@@ -24,17 +24,16 @@ export class PeriodItemListComponent implements OnInit {
     to: new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() + 1)
   };
 
-  constructor(private periodService: PeriodService) {
+  constructor(private periodService: PeriodService, private router: Router) {
   }
 
   ngOnInit() {
   }
 
   changePeriod(period: ITimePeriod) {
-
-    console.dir('Период' +period);
+    console.dir('Период' + period);
     this.periodService.setCurrentPeriod(period);
-    this.onTimePeriodChange.emit();
+    this.router.navigate(['statistics']);
   }
 
 }

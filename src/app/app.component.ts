@@ -11,5 +11,16 @@ import { Component } from '@angular/core';
 
 export class AppComponent {
   userName: string;
+  isTimePeriodView = false;
+  isOperationListView = false;
+  onCategoryClick() {
+    console.dir('Click on Category');
+    this.isTimePeriodView = false;
+    this.isOperationListView = true;
+  }
 
+  onTimePeriodChange() {
+    this.isOperationListView = false;
+    this.isTimePeriodView = true;
+  }
   }

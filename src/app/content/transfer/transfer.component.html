@@ -1,0 +1,16 @@
+<form [formGroup]="transferForm" (ngSubmit)="onSubmit()">
+  <p>
+    <label>To: </label>
+    <input type="text" formControlName="to">
+  </p>
+  <p>
+    <label>Description: </label>
+    <input type="text" formControlName="description">
+  </p>
+  <p>
+    <label>Value: </label>
+    <input type="text" formControlName="value">
+  </p>
+  <button type="submit" [disabled]="!transferForm.valid">Transfer!</button>
+
+</form>
