@@ -1,4 +1,4 @@
-
+<div *ngIf="isAuthorize()">
 <div class="period__list">
   <app-period-item-list></app-period-item-list>
 </div>
@@ -7,9 +7,12 @@
   </app-category-item-list>
 </div>
 <div class="user__info">
-  <!-- <app-user-info></app-user-info> -->
+  <app-user-info></app-user-info>
 </div>
-
+  <div class = "transfer">
+    <p  (click)="clickOnTransfer()">transfer</p>
+  </div>
+</div>
 <router-outlet></router-outlet>
 
 

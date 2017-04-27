@@ -22,6 +22,8 @@ import {routing} from "./app.routing";
 import { UserInfoComponent } from './main/user-info/user-info.component';
 import {GroupService} from "./main/services/group.service";
 import { TransferComponent } from './content/transfer/transfer.component';
+import { SharedContentComponent } from './shared-content/shared-content.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 
 @NgModule({
@@ -36,7 +38,9 @@ import { TransferComponent } from './content/transfer/transfer.component';
     LogInComponent,
     PieComponent,
     UserInfoComponent,
-    TransferComponent
+    TransferComponent,
+    SharedContentComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

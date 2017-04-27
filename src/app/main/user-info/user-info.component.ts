@@ -14,7 +14,10 @@ export class UserInfoComponent implements OnInit {
 
   ngOnInit() {
     this.dataService.getInfoAboutCurrentUser()
-      .subscribe(val => this.userInfo = val);
+      .subscribe(val => {
+        console.dir('Событие получения данных пользователя');
+        if (!(val == null && typeof val==='undefined'))  this.userInfo = val
+      });
   }
 
 

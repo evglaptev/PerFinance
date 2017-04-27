@@ -14,3 +14,12 @@
   <button type="submit" [disabled]="!transferForm.valid">Transfer!</button>
 
 </form>
+
+
+<div *ngIf="isOk">
+  OK
+</div>
+
+<div *ngIf="isNotOk">
+  NOT OK
+</div>

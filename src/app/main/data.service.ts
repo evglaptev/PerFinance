@@ -1,33 +1,39 @@
 import { Injectable } from '@angular/core';
 import {IOperationsData} from './shared/ioperations-data';
-import {Http, Response} from '@angular/http';
-import {Observable, Subject} from "rxjs";
-import {IUserInfo} from "./shared/iuser-info";
+import {Http, RequestOptions, Response, Headers} from '@angular/http';
+import {Observable, Subject} from 'rxjs';
+import {IUserInfo} from './shared/iuser-info';
 
 @Injectable()
 export class DataService {
   data: IOperationsData[];
 
-  BASE_URL = 'http://188.255.20.77:81/perFinance/api/';
+   BASE_URL = 'http://188.255.20.77:81/perFinance/api/';
   // sub = new Subject<boolean>();
-  static createTransferItem(from: string, to: string, value: number) {
+  static createTransferItem(from: string, to: string, balance: number) {
     return {
       from,
       to,
-      value
+      balance
     };
   }
   constructor(private http: Http) {
   }
 
   private getInfoAboutUser(name: string): Observable<IUserInfo> {
-
+    console.dir('getInfoAboutUser');
     return this.http.get(`${this.BASE_URL}UserInfo?userName=${name}`)
-      .map(val => val.json());
+      .map(val => {
+        console.dir(val);
+        return val.json();
+      });
 
   }
 
+
+
   getInfoAboutCurrentUser() {
+
     return this.getInfoAboutUser(localStorage.getItem('currentUser'));
   }
 
@@ -51,14 +57,22 @@ export class DataService {
     return this.getDataByName(localStorage.getItem('currentUser'));
   }
 
-  sendTransferFromCurrentUser(to: string, value: number): Observable<boolean> {
+  sendTransferFromCurrentUser(to: string, value: number, descrip: string): Observable<boolean> {
+
     return this.sendTransferFromUser(localStorage.getItem('currentUser'), to, value);
 
   }
 
   private sendTransferFromUser(from: string, to: string, value: number): Observable<boolean> {
-    return this.http.post(`${this.BASE_URL}Transfer`, DataService.createTransferItem(from, to, value))
-      .map(val => val.json());
+   const body = JSON.stringify(DataService.createTransferItem(from, to, value));
+    console.dir(body);
+    const headers = new Headers({'Content-Type': 'application/json'});
+    const options = new RequestOptions({headers: headers});
+    return this.http.post(`${this.BASE_URL}Transfer`, body, options )
+      .map(val => {
+        console.dir(val.json());
+       return val.json();
+      });
   }
 
 

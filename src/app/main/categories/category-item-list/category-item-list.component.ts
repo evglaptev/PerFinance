@@ -24,7 +24,7 @@ export class CategoryItemListComponent implements OnInit {
   setFilter(category: ICategoryName) {
     console.dir("Select category ----" + category.name);
     this.categoryService.setCurrentCategory(category);
-    this.routing.navigate(['category']);
+    this.routing.navigate(['my/category']);
   }
 
   isActive(id) {

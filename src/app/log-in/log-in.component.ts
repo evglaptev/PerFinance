@@ -21,15 +21,18 @@ export class LogInComponent {
   }
 
   onSubmit() {
-    if (this.authService.login(
-        this.loginForm.controls['name'].value,
-        this.loginForm.controls['password'].value
-      )) {
-      this.router.navigate(['/']);
-    }
-    else {
-      console.dir('Неверный логин или пароль');
-      this.loginForm.reset();
-    }
+    this.authService.login(
+      this.loginForm.controls['name'].value,
+      this.loginForm.controls['password'].value
+    ).subscribe(val => {
+      if (val) {
+        this.router.navigate(['/my']);
+
+        console.dir('Авторизован');
+      } else {
+        console.dir('Неверный логин или пароль');
+        this.loginForm.reset();
+      }
+    });
   }
 }

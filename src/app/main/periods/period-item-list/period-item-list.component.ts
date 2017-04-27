@@ -33,7 +33,7 @@ export class PeriodItemListComponent implements OnInit {
   changePeriod(period: ITimePeriod) {
     console.dir('Период' + period);
     this.periodService.setCurrentPeriod(period);
-    this.router.navigate(['statistics']);
+    this.router.navigate(['my/statistics']);
   }
 
 }

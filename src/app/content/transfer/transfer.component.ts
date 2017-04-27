@@ -15,7 +15,8 @@ export class TransferComponent implements OnInit {
   constructor(fb: FormBuilder, private dataService: DataService) {
     this.transferForm = fb.group({
       'to': ['', Validators.required],
-      'value': ['', Validators.required]
+      'value': ['', Validators.required],
+      'description':['']
     });
 
   }
@@ -24,12 +25,15 @@ export class TransferComponent implements OnInit {
 
     this.dataService.sendTransferFromCurrentUser(
       this.transferForm.controls['to'].value,
-      +this.transferForm.controls['value'].value
+      +this.transferForm.controls['value'].value,
+      this.transferForm.controls['description'].value
     ).subscribe(result => {
       if (result) {
         this.isOk = true;
+        this.isNotOk=false;
       } else {
         this.isNotOk = true;
+        this.isOk = false;
       }
     });
 
