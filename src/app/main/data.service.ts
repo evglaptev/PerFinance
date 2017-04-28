@@ -1,15 +1,19 @@
 import { Injectable } from '@angular/core';
 import {IOperationsData} from './shared/ioperations-data';
 import {Http, RequestOptions, Response, Headers} from '@angular/http';
-import {Observable, Subject} from 'rxjs';
+import {Observable, ReplaySubject, Subject} from 'rxjs/Rx';
+import {from} from 'rxjs/observable/from';
+//import {Rx} from 'rxjs/Rx';
 import {IUserInfo} from './shared/iuser-info';
+import {IntervalObservable} from "rxjs/observable/IntervalObservable";
+import {combineLatest} from "rxjs/observable/combineLatest";
 
 @Injectable()
 export class DataService {
   data: IOperationsData[];
-
+currentStatus:number;
    BASE_URL = 'http://188.255.20.77:81/perFinance/api/';
-  // sub = new Subject<boolean>();
+   sub = new ReplaySubject<IUserInfo>(1);
   static createTransferItem(from: string, to: string, balance: number) {
     return {
       from,
@@ -19,14 +23,33 @@ export class DataService {
   }
   constructor(private http: Http) {
   }
+//  console.dir('getInfoAboutUser');
 
   private getInfoAboutUser(name: string): Observable<IUserInfo> {
-    console.dir('getInfoAboutUser');
-    return this.http.get(`${this.BASE_URL}UserInfo?userName=${name}`)
-      .map(val => {
-        console.dir(val);
-        return val.json();
-      });
+    const request = this.http.get(`${this.BASE_URL}UserInfo?userName=${name}`)
+    .map(val => {
+      return val.json();
+    });
+  return  IntervalObservable.create(1000).switchMapTo(request);
+
+    //console.dir(val);
+    //this.sub.next(val.json());
+ //   return IntervalObservable.create(1000).map(()=> {
+//        return this.http.get(`${this.BASE_URL}UserInfo?userName=${name}`)
+ //         .map(val => {
+  //          val.json()
+  //          console.dir(val);
+ //          this.sub.next(val.json());
+ //         }).subscribe();
+ //     })
+
+
+
+   // return this.http.get(`${this.BASE_URL}UserInfo?userName=${name}`)
+    //  .map(val => {
+    //    console.dir(val);
+  //     return val.json();
+  //    });
 
   }
 
@@ -34,7 +57,19 @@ export class DataService {
 
   getInfoAboutCurrentUser() {
 
-    return this.getInfoAboutUser(localStorage.getItem('currentUser'));
+   // this.sub.next(val.json());
+  //  combineLatest(IntervalObservable.create(1000), this.sub)
+  //  .subscribe(val=>{
+   //   console.dir("val");
+   // });
+
+
+  return this.getInfoAboutUser(localStorage.getItem('currentUser'));
+   // return this.sub.asObservable();
+ //   return IntervalObservable.create(1000).map(() => {
+  //    return this.getInfoAboutUser(localStorage.getItem('currentUser'));
+ //   });
+
   }
 
   getDataByName(name: string): Observable<IOperationsData[]> {
