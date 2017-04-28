@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthService} from "./auth.service";
+import {AuthService} from "./services/auth.service";
 import {Router} from "@angular/router";
 
 @Component({
@@ -26,12 +26,7 @@ export class AppComponent implements OnInit {
   }
   isAuthorize(){return this.authService.isAutorize();
   }
-  clickOnTransfer() {
 
-    console.dir('TRANSFEEER');
-
-    this.router.navigate(['my/transfer']);
-  }
 
   // userName: string;
 //  isTimePeriodView = false;

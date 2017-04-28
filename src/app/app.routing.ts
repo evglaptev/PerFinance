@@ -2,9 +2,9 @@
 import {RouterModule, Routes} from '@angular/router';
 import {LogInComponent} from './log-in/log-in.component';
 import {AuthGuard} from './guards/auth.guard';
-import {OperationItemListComponent} from './main/operations/operation-item-list/operation-item-list.component';
-import {StaticOfPeriodComponent} from './main/static-of-period/static-of-period.component';
-import {TransferComponent} from './content/transfer/transfer.component';
+import {OperationItemListComponent} from './dynamic-content/operations/operation-item-list/operation-item-list.component';
+import {StaticOfPeriodComponent} from './dynamic-content/static-of-period/static-of-period.component';
+import {TransferComponent} from './dynamic-content/transfer/transfer.component';
 import {NotFoundComponent} from "./not-found/not-found.component";
 const appRoutes: Routes = [
   {path: 'my', children: [

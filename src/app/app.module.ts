@@ -5,25 +5,26 @@ import { HttpModule } from '@angular/http';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 import { AppComponent } from './app.component';
-import { PeriodItemListComponent } from './main/periods/period-item-list/period-item-list.component';
-import { OperationItemListComponent } from './main/operations/operation-item-list/operation-item-list.component';
-import { OperationItemComponent } from './main/operations/operation-item/operation-item.component';
-import { CategoryItemListComponent } from './main/categories/category-item-list/category-item-list.component';
-import {DataService} from './main/data.service';
-import { StaticOfPeriodComponent } from './main/static-of-period/static-of-period.component';
-import { PageListComponent } from './main/operations/pages/page-list/page-list.component';
+import { PeriodItemListComponent } from './static-content/period-item-list/period-item-list.component';
+import { OperationItemListComponent } from './dynamic-content/operations/operation-item-list/operation-item-list.component';
+import { OperationItemComponent } from './dynamic-content/operations/operation-item/operation-item.component';
+import { CategoryItemListComponent } from './static-content/category-item-list/category-item-list.component';
+import {DataService} from './services/data.service';
+import { StaticOfPeriodComponent } from './dynamic-content/static-of-period/static-of-period.component';
+import { PageListComponent } from './dynamic-content/operations/pages/page-list/page-list.component';
 import { LogInComponent } from './log-in/log-in.component';
-import { PieComponent } from './main/static-of-period/pie/pie.component';
-import {CategoryService} from './main/services/category.service';
-import {PeriodService} from './main/services/period.service';
-import {AuthService} from "./auth.service";
-import {AuthGuard} from "./guards/auth.guard";
-import {routing} from "./app.routing";
-import { UserInfoComponent } from './main/user-info/user-info.component';
-import {GroupService} from "./main/services/group.service";
-import { TransferComponent } from './content/transfer/transfer.component';
-import { SharedContentComponent } from './shared-content/shared-content.component';
+import { PieComponent } from './dynamic-content/static-of-period/pie/pie.component';
+import {CategoryService} from './services/category.service';
+import {PeriodService} from './services/period.service';
+import {AuthService} from './services/auth.service';
+import {AuthGuard} from './guards/auth.guard';
+import {routing} from './app.routing';
+import { UserInfoComponent } from './static-content/user-info/user-info.component';
+import {GroupService} from './services/group.service';
+import { TransferComponent } from './dynamic-content/transfer/transfer.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { LogOutComponent } from './static-content/log-out/log-out.component';
+import { TransferButtonComponent } from './static-content/transfer-button/transfer-button.component';
 
 
 @NgModule({
@@ -39,8 +40,9 @@ import { NotFoundComponent } from './not-found/not-found.component';
     PieComponent,
     UserInfoComponent,
     TransferComponent,
-    SharedContentComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    LogOutComponent,
+    TransferButtonComponent
   ],
   imports: [
     BrowserModule,

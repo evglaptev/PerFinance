@@ -1,0 +1,31 @@
+
+<div class="container">
+
+<form [formGroup]="transferForm" (ngSubmit)="onSubmit()">
+<div class="elem">
+    <label>Номер счёта получателя: </label></div>
+    <input type="text" formControlName="to">
+
+  <div class="elem">
+    <label>Описание: </label></div>
+    <input type="text" formControlName="description">
+
+  <div class="elem">
+    <label>Сумма р.: </label>
+  </div>
+    <input type="text" formControlName="value">
+
+  <div class="elem"></div>
+  <button type="submit" [disabled]="!transferForm.valid">Отправить!</button>
+
+</form>
+
+
+<div *ngIf="isOk">
+  Перевод выполнен успешно!
+</div>
+
+<div *ngIf="isNotOk">
+  Перевод не выполнен.
+</div>
+</div>

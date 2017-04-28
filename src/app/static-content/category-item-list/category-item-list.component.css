@@ -1,0 +1,24 @@
+.category__list{
+  border-radius: 2px;
+}
+ul{
+  list-style:none;
+  width: 100px;
+  padding: 0;
+  position: fixed;
+  margin-top: 100px;
+  border-radius: 2px;
+}
+li{
+  text-align: center;
+  background-color: silver;
+  padding: 10px;
+  width: 80px;
+  display: block;
+}
+li:hover{
+  cursor: default;
+  color: white;
+  background-color: darkgray;
+
+}

@@ -1,0 +1,20 @@
+<div class="container" *ngIf="userInfo">
+  <div class="account__number elem">
+<p>Номер счёта: </p>
+<p>
+  {{userInfo.accountNumber}}
+</p>
+  </div>
+  <div class="name elem">
+<p>Имя: </p>
+<p>
+  {{userInfo.name}}
+</p>
+</div>
+<div class="balance elem">
+<p>Баланс: </p>
+<p>
+  {{userInfo.balance}}
+</p>
+</div>
+</div>
