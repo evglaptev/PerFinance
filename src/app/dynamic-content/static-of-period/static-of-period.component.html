@@ -1,0 +1,12 @@
+<div class="pie" *ngIf="chartIsVisible">
+<app-pie [pieChartLabels] = 'pieChartLabels' [pieChartData]="pieChartData" ></app-pie>
+
+
+<div *ngFor="let item of categoryList"  class="stats">
+
+    <p class="p">Потрачено в категории {{item.name}} : {{item.price}}р.</p>
+
+</div>
+
+  <p>Потрачено всего: {{sum}} р. </p>
+</div>

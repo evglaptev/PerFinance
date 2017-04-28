@@ -1,0 +1,18 @@
+.transfer{
+  position: absolute;
+  right:5px;
+  top:5px;
+  width: 120px;
+  background-color: silver;
+  text-align: center;
+  font-size: 0.8em;
+  height: 60px;
+  vertical-align: middle;
+  border-radius: 2px;
+}
+
+.transfer:hover{
+  cursor: default;
+  color: white;
+  background-color: darkgray;
+}

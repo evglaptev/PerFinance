@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {AuthService} from "./services/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -9,7 +11,37 @@ import { Component } from '@angular/core';
 
 
 
-export class AppComponent {
-  userName: string;
+export class AppComponent implements OnInit {
 
+  constructor(private authService: AuthService, private router: Router) {
   }
+
+  ngOnInit(): void {
+    console.dir('init app component');
+   // this.authService.isAutorize().subscribe(status => {
+    //  this.isAuthorize = status;
+    //  console.dir(this.isAuthorize);
+    //  console.dir('Autorize is: ');
+   // }   );
+  }
+  isAuthorize(){return this.authService.isAutorize();
+  }
+
+
+  // userName: string;
+//  isTimePeriodView = false;
+//  isOperationListView = false;
+
+  // onCategoryClick() {
+  //   console.dir('Click on Category');
+  //   this.isTimePeriodView = false;
+  //   this.isOperationListView = true;
+  // }
+
+  // onTimePeriodChange() {
+  //   this.isOperationListView = false;
+  //   this.isTimePeriodView = true;
+  // }
+
+
+}

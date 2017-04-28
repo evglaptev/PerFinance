@@ -1,4 +1,21 @@
-<app-log-in></app-log-in>
-<app-view-for-user> </app-view-for-user>
+<div *ngIf="isAuthorize()">
+<div class="period__list">
+  <app-period-item-list></app-period-item-list>
+</div>
+<div class="category__list">
+  <app-category-item-list>
+  </app-category-item-list>
+</div>
+<div class="user__info">
+  <app-user-info></app-user-info>
+</div>
+  <div class = "transfer">
+    <app-transfer-button></app-transfer-button>
+  </div>
+  <div class="logout">
+    <app-log-out></app-log-out>
+  </div>
+</div>
+<router-outlet></router-outlet>
 
 
