@@ -10,7 +10,7 @@ import {CategoryService} from "../../../services/category.service";
 export class OperationItemComponent{
   @Input() item: IOperationsData;
 
-  constructor(private categoryService:CategoryService) {
+  constructor(public categoryService:CategoryService) {
   }
 
 

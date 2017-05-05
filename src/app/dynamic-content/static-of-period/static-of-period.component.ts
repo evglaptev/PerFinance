@@ -8,11 +8,11 @@ import {ICategoryName} from "../../shared/icategory-name";
   styleUrls: ['./static-of-period.component.css']
 })
 export class StaticOfPeriodComponent {
-  private pieChartLabels: string[];
-  private pieChartData: number[] = [];
-  private chartIsVisible = false;
-  private categoryList: ICategoryName[];
-  private sum=0;
+   pieChartLabels: string[];
+   pieChartData: number[] = [];
+   chartIsVisible = false;
+   categoryList: ICategoryName[];
+  sum=0;
 
 
   constructor(private groupService: GroupService) {

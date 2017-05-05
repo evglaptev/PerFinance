@@ -6,9 +6,9 @@ import 'chart.js';
   styleUrls: ['./pie.component.css']
 })
 export class PieComponent {
-  private _pieChartData: number[];
-  private pieChartType = 'doughnut';
-  private _pieChartLabels: string[];
+   _pieChartData: number[];
+   pieChartType = 'doughnut';
+   _pieChartLabels: string[];
   get pieChartLabels(): string[] {
     return this._pieChartLabels;
   }

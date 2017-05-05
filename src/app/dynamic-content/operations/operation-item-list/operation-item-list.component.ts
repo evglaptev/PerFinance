@@ -10,14 +10,14 @@ import {IOperationsData} from '../../../shared/ioperations-data';
 export class OperationItemListComponent implements OnInit {
 
  private currentCategoryData: IOperationsData[];
-  private currentPageData: IOperationsData[];
-  private currentPage = 1;
-  private lengthData: number;
-  private elementsOnPage = 8;
-  private pageNumber: number;
-  private listNumPage: number[];
+   currentPageData: IOperationsData[];
+   currentPage = 1;
+   lengthData: number;
+   elementsOnPage = 20;
+   pageNumber: number;
+   listNumPage: number[];
 
-  constructor(private categoryService: CategoryService) {}
+  constructor(public categoryService: CategoryService) {}
 /* событие клика на номер страницы */
   changePage(numPage) {
     this.currentPage = numPage;

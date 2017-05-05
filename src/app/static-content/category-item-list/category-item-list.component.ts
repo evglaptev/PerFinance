@@ -10,7 +10,7 @@ import {ICategoryName} from "../../shared/icategory-name";
 })
 
 export class CategoryItemListComponent implements OnInit {
- private categoryListName: ICategoryName[];
+  categoryListName: ICategoryName[];
 
 
   constructor(private categoryService: CategoryService, private routing: Router) {

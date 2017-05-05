@@ -1,22 +1,21 @@
 
-<div class="container">
+<div class="container-fluid">
 
 <form [formGroup]="transferForm" (ngSubmit)="onSubmit()">
-<div class="elem">
-    <label>Номер счёта получателя: </label></div>
-    <input type="text" formControlName="to">
+<div class="form-group">
 
-  <div class="elem">
-    <label>Описание: </label></div>
-    <input type="text" formControlName="description">
-
-  <div class="elem">
-    <label>Сумма р.: </label>
+    <label for="to"> Номер счёта получателя: </label>
+  <input type="text" class="form-control" id="to" formControlName="to">
+</div>
+  <div class="form-group">
+    <label for="descrip" >Описание: </label>
+  <input id="descrip" class="form-control" type="text" formControlName="description">
   </div>
-    <input type="text" formControlName="value">
-
-  <div class="elem"></div>
-  <button type="submit" [disabled]="!transferForm.valid">Отправить!</button>
+  <div class="form-group">
+    <label for="sum">Сумма р.: </label>
+  <input type="text" id="sum" class="form-control" formControlName="value">
+  </div>
+  <button type="submit" class="btn btn-primary" [disabled]="!transferForm.valid">Отправить!</button>
 
 </form>
 

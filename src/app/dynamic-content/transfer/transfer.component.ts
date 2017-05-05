@@ -8,11 +8,11 @@ import {DataService} from "../../services/data.service";
   styleUrls: ['./transfer.component.css']
 })
 export class TransferComponent implements OnInit {
- private transferForm: FormGroup;
- private isOk = false;
- private isNotOk = false;
+  transferForm: FormGroup;
+  isOk = false;
+  isNotOk = false;
 
-  constructor(fb: FormBuilder, private dataService: DataService) {
+  constructor(fb: FormBuilder, public dataService: DataService) {
     this.transferForm = fb.group({
       'to': ['', Validators.required],
       'value': ['', Validators.required],
