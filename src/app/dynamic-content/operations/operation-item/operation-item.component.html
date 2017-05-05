@@ -1,40 +1,22 @@
 
-<div class="operation__item">
-<div class="row-1 row">
-  <div class="col-1 col">
-  <div class="category__item">
-    <span>Категория: </span>
-    {{categoryService.getNameCategoryById(item.type)}}
+
+<div class="row">
+
+  <div class="col-md-3">
+    <div class="col-md-6">Категория:</div>
+    <div class="col-md-6">{{categoryService.getNameCategoryById(item.type)}}</div>
   </div>
+  <div class="col-md-3">
+    <div class="col-md-4">Место:</div>
+    <div class="col-md-8">{{item.place}}</div>
   </div>
-  <div class="col-2 col">
-  <div class="place__item">
-    <span>Место: </span>
-    {{item.place}}
-  </div>
-  </div>
-  <div class="col-3 col">
-  <div class="time__item">
-   <div class="date"> {{item.time.getDate()+'.'+(item.time.getMonth() + 1)+'.'+item.time.getFullYear()}}</div>
-    <div class="time"> {{item.time.getHours()+':'+item.time.getMinutes()+':'+item.time.getSeconds()}}</div>
-  </div>
-  </div>
-</div>
-  <div class="row-2 row">
-    <div class="col-1 col">
-  <div class="address__item">
-    <span>Адрес операции</span>
-  </div>
-    </div>
-    <div class="col-2 col">
-  <div class="info-order__item">
-    <span>Информация о покупке</span>
-  </div>
-    </div>
-    <div class="col-3 col">
-  <div class="price__item">
-    <span>Цена: {{item.price}} р</span>
-  </div>
-    </div>
+  <div class="col-md-3">
+      <div class="col-md-6">{{item.time.getDate()+'.'+(item.time.getMonth() + 1)+'.'+item.time.getFullYear()}}</div>
+      <div class="col-md-6">{{item.time.getHours()+':'+item.time.getMinutes()+':'+item.time.getSeconds()}}</div>
+   </div>
+  <div class="col-md-3">
+    <div class="col-md-4">Цена:</div>
+    <div class="col-md-8">{{item.price}} </div>
   </div>
 </div>
+

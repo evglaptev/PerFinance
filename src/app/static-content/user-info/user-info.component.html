@@ -1,20 +1,25 @@
 <div class="container" *ngIf="userInfo">
-  <div class="account__number elem">
-<p>Номер счёта: </p>
-<p>
-  {{userInfo.accountNumber}}
-</p>
+  <div class="row">
+    <div class="col-md-2">
+      <div class="panel panel-default">
+        <div class="panel-heading">О вас</div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-4">Счёт:</div>
+            <div class="col-md-8">{{userInfo.accountNumber}}</div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">Имя:</div>
+            <div class="col-md-8">{{userInfo.name}}</div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">Баланс:</div>
+            <div class="col-md-8">{{userInfo.balance}}</div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
   </div>
-  <div class="name elem">
-<p>Имя: </p>
-<p>
-  {{userInfo.name}}
-</p>
-</div>
-<div class="balance elem">
-<p>Баланс: </p>
-<p>
-  {{userInfo.balance}}
-</p>
-</div>
 </div>

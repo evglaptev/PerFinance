@@ -15,7 +15,6 @@ export class LogOutComponent implements OnInit {
   }
 
   logOut(){
-    console.dir('click');
     this.authService.logOut();
     this.router.navigate(['/']);
   }

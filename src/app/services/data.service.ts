@@ -24,7 +24,7 @@ export class DataService {
     .map(val => {
       return val.json();
     });
-  return  IntervalObservable.create(1000).switchMapTo(request);
+  return  IntervalObservable.create(2000).switchMapTo(request);
   }
 
 

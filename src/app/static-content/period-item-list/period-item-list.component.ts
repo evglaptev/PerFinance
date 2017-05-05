@@ -27,7 +27,9 @@ export class PeriodItemListComponent {
   }
 
   changePeriod(period: ITimePeriod) {
+    console.dir(period);
     this.periodService.setCurrentPeriod(period);
-    this.router.navigate(['my/statistics']);
+    //this.router.navigate(['my/statistics']);
+
   }
 }

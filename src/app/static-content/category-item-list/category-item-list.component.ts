@@ -23,7 +23,7 @@ export class CategoryItemListComponent implements OnInit {
 
   setFilter(category: ICategoryName) {
     this.categoryService.setCurrentCategory(category);
-    this.routing.navigate(['my/category']);
+   // this.routing.navigate(['my/category']);
   }
 /* состояние элемента списка категории ( выбрано/ не выбрано) */
   isActive(id) {

@@ -1,6 +1,15 @@
 
-<ul>
-  <li (click)="changePeriod(this.currentDay)">День</li>
-  <li (click)="changePeriod(this.currentMonth)" >Месяц</li>
-  <li (click)="changePeriod(this.currentYear)">Год</li>
-</ul>
+<nav class="navbar navbar-default ">
+  <div class="container-fluid">
+  <ul class="nav navbar-nav navbar-left">
+    <li><a [routerLink]= "['my/statistics']"  (click)="changePeriod(this.currentDay)">День</a></li>
+    <li><a [routerLink]= "['my/statistics']"  (click)="changePeriod(this.currentMonth)">Месяц</a></li>
+    <li><a [routerLink]= "['my/statistics']"  (click)="changePeriod(this.currentYear)">Год</a></li>
+    <li><app-transfer-button></app-transfer-button></li>
+  </ul>
+    <ul class="nav navbar-nav navbar-right ">
+      <li><app-log-out></app-log-out></li>
+    </ul>
+
+  </div>
+</nav>

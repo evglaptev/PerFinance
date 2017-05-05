@@ -1,14 +1,8 @@
+<ul class="nav nav-pills nav-stacked" *ngFor="let item of categoryListName">
+  <li><a [routerLink]= "['my/category']" class="navbar-link" (click)="setFilter(item)">{{item.name}}</a></li>
 
-<ul class="category__list">
-  <div *ngFor="let item of categoryListName">
-  <li
-      class="filters__item"
-      [class.filters__item_selected]="isActive(item)"
-      (click)="setFilter(item)">
-
-     {{item.name}}
-
-  </li>
-  </div>
 </ul>
+
+
+
 

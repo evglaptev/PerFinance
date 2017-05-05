@@ -21,9 +21,11 @@ export class PeriodService {
   setCurrentPeriod(timePeriod: ITimePeriod) {
     this.timePeriod = timePeriod;
     this.updateData();
+
   }
 /* выбор операций в рамках текущего периода */
   private updateData() {
+    console.dir(this.data);
     this.periodData = this.data.filter(item => {
       return (
         item.time.getTime() >= this.timePeriod.from.getTime()
