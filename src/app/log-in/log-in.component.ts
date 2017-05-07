@@ -13,6 +13,8 @@ export class LogInComponent {
   constructor(fb: FormBuilder,
               public authService: AuthService,
               public router: Router) {
+
+    console.dir('login constructor')
     this.loginForm = fb.group({
       'name': ['', Validators.required],
       'password': ['', Validators.required]
