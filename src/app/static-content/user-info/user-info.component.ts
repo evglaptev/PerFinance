@@ -15,7 +15,11 @@ export class UserInfoComponent implements OnInit {
   ngOnInit() {
     this.dataService.getInfoAboutCurrentUser()
       .subscribe(val => {
-        if (!(val == null && typeof val === 'undefined'))  this.userInfo = val
+        if (!(val == null && typeof val === 'undefined'))
+        {
+          this.userInfo = val;
+          localStorage.setItem('currentId', val.accountNumber);
+        }
       });
   }
 

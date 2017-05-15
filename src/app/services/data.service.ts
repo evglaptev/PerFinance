@@ -27,7 +27,14 @@ export class DataService {
   return  IntervalObservable.create(2000).switchMapTo(request);
   }
 
+  accNumberIsCorrect(accNumber: string): Observable<boolean> {
+    const request = this.http.get(`${this.BASE_URL}accNumberIsCorrect?accNumber=${accNumber}`)
+      .map(val => {
+        return val.json();
+      });
+    return request;
 
+  }
 
   getInfoAboutCurrentUser() {
   return this.getInfoAboutUser(localStorage.getItem('currentUser'));
@@ -49,13 +56,14 @@ export class DataService {
     return this.getDataByName(localStorage.getItem('currentUser'));
   }
   sendTransferFromCurrentUser(to: string, value: number, descrip: string): Observable<boolean> {
-    return this.sendTransferFromUser(localStorage.getItem('currentUser'), to, value);
+    return this.sendTransferFromUser(localStorage.getItem('currentId'), to, value);
   }
 
   private sendTransferFromUser(from: string, to: string, value: number): Observable<boolean> {
    const body = JSON.stringify(DataService.createTransferItem(from, to, value));
     const headers = new Headers({'Content-Type': 'application/json'});
     const options = new RequestOptions({headers: headers});
+    console.dir(body);
     return this.http.post(`${this.BASE_URL}Transfer`, body, options )
       .map(val => val.json());
   }

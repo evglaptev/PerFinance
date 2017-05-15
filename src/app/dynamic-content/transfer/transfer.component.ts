@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {DataService} from "../../services/data.service";
+import {
+  AbstractControl, AsyncValidatorFn, FormBuilder, FormGroup, ValidationErrors, Validator, ValidatorFn,
+  Validators
+} from '@angular/forms';
+import {DataService} from '../../services/data.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-transfer',
@@ -14,13 +18,24 @@ export class TransferComponent implements OnInit {
 
   constructor(fb: FormBuilder, public dataService: DataService) {
     this.transferForm = fb.group({
-      'to': ['', Validators.required],
-      'value': ['', Validators.required],
-      'description':['']
+      'to': ['', [Validators.required, lengthValidator(9)], this.correctValidator()],
+      'value': ['', [Validators.required, Validators.maxLength(10)]],
+      'description': ['']
     });
 
   }
+  correctValidator(): AsyncValidatorFn {
+  return (control: AbstractControl): Observable<{ [key: string]: any }> => {
+    console.dir("tttt");
+    return this.dataService.accNumberIsCorrect(control.value)
+      .map(val => {
+        return !val ? {'NotIsCorrectAccNumber': {val}
+        } : null;
+      });
 
+  };
+
+}
   onSubmit() {
 
     this.dataService.sendTransferFromCurrentUser(
@@ -30,7 +45,7 @@ export class TransferComponent implements OnInit {
     ).subscribe(result => {
       if (result) {
         this.isOk = true;
-        this.isNotOk=false;
+        this.isNotOk = false;
       } else {
         this.isNotOk = true;
         this.isOk = false;
@@ -44,3 +59,12 @@ export class TransferComponent implements OnInit {
   }
 
 }
+function lengthValidator(length): ValidatorFn {
+  return (control: AbstractControl): {[key: string]: any} => {
+    const name = control.value.toString();
+    console.dir(name.length);
+    return name.length !== length ? {'forbiddenLength': {length}} : null;
+  };
+}
+
+
