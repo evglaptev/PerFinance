@@ -20,6 +20,7 @@ export class OperationItemListComponent implements OnInit {
   constructor(public categoryService: CategoryService) {}
 /* событие клика на номер страницы */
   changePage(numPage) {
+    console.dir(numPage);
     this.currentPage = numPage;
     this.updateCurrentPageData();
   }
@@ -28,7 +29,7 @@ export class OperationItemListComponent implements OnInit {
     this.lengthData = this.currentCategoryData.length;
     this.pageNumber = this.lengthData / this.elementsOnPage;
     this.listNumPage = [];
-    for (let i = 1; i <= this.pageNumber; i++) {
+    for (let i = 1; i < this.pageNumber; i++) {
       this.listNumPage.push(i);
     }
   }
@@ -42,7 +43,11 @@ export class OperationItemListComponent implements OnInit {
   }
   /* изменение данных текущей страницы */
  private updateCurrentPageData() {
-    this.currentPageData = this.currentCategoryData.splice(this.elementsOnPage * (this.currentPage - 1), this.elementsOnPage - 1);
-  }
+   console.dir("updCurrentPageData before splice");
+   console.dir(this.currentCategoryData);
+    this.currentPageData = this.currentCategoryData.slice(this.elementsOnPage * (this.currentPage - 1), this.currentPage*this.elementsOnPage);
+   console.dir("updCurrentPageData after splice");
+   console.dir(this.currentCategoryData);
+ }
 
 }
