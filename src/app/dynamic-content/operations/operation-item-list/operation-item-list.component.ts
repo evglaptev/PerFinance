@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {CategoryService} from '../../../services/category.service';
 import {IOperationsData} from '../../../shared/ioperations-data';
+import {PagesService} from '../../../services/pages.service';
 
 @Component({
   selector: 'app-operation-item-list',
@@ -9,45 +10,37 @@ import {IOperationsData} from '../../../shared/ioperations-data';
 })
 export class OperationItemListComponent implements OnInit {
 
- private currentCategoryData: IOperationsData[];
    currentPageData: IOperationsData[];
-   currentPage = 1;
-   lengthData: number;
-   elementsOnPage = 20;
-   pageNumber: number;
-   listNumPage: number[];
+  listNumPage: number[];
 
-  constructor(public categoryService: CategoryService) {}
-/* событие клика на номер страницы */
+  constructor(public pagesService: PagesService) {
+    this.pagesService.getCurrentPageData().subscribe(
+        data => {
+          this.currentPageData = data;
+        });
+    this.pagesService.getNumberOfPages().subscribe( number =>
+      this.listNumPage = this.getArrayOfNumbersPage(number) );
+  }
+/* событие клика по номеру страницы */
   changePage(numPage) {
-    console.dir(numPage);
-    this.currentPage = numPage;
-    this.updateCurrentPageData();
+    this.pagesService.changePage(numPage);
+   // this.listNumPage = this.pagesService.getArrayOfNumbersPage();
+    console.dir('Клик по странице номер ' + numPage);
+    console.dir(this.currentPageData);
   }
-/* пересчёт количества страниц  */
- private updateListNumPage() {
-    this.lengthData = this.currentCategoryData.length;
-    this.pageNumber = this.lengthData / this.elementsOnPage;
-    this.listNumPage = [];
-    for (let i = 1; i < this.pageNumber; i++) {
-      this.listNumPage.push(i);
+
+
+  private getArrayOfNumbersPage(numberOfPages: number): number[] {
+    const listNumPage = [];
+    for (let i = 1; i <= numberOfPages; i++) {
+      listNumPage.push(i);
     }
+    return listNumPage;
   }
+
 
   ngOnInit() {
-    this.categoryService.getOperationsListForCurrentCategory().subscribe(val => {
-      this.currentCategoryData = val;
-      this.updateListNumPage();
-      this.updateCurrentPageData();
-    });
+
   }
-  /* изменение данных текущей страницы */
- private updateCurrentPageData() {
-   console.dir("updCurrentPageData before splice");
-   console.dir(this.currentCategoryData);
-    this.currentPageData = this.currentCategoryData.slice(this.elementsOnPage * (this.currentPage - 1), this.currentPage*this.elementsOnPage);
-   console.dir("updCurrentPageData after splice");
-   console.dir(this.currentCategoryData);
- }
 
 }

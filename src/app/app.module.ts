@@ -25,6 +25,7 @@ import { TransferComponent } from './dynamic-content/transfer/transfer.component
 import { NotFoundComponent } from './not-found/not-found.component';
 import { LogOutComponent } from './static-content/log-out/log-out.component';
 import { TransferButtonComponent } from './static-content/transfer-button/transfer-button.component';
+import {PagesService} from "./services/pages.service";
 
 
 @NgModule({
@@ -52,7 +53,10 @@ import { TransferButtonComponent } from './static-content/transfer-button/transf
     ReactiveFormsModule,
     routing
   ],
-  providers: [GroupService, DataService, CategoryService, PeriodService, AuthService, AuthGuard
+  providers: [GroupService, DataService, CategoryService, PeriodService, AuthService, AuthGuard,
+    PagesService
+
+
   ],
   bootstrap: [AppComponent]
 })
