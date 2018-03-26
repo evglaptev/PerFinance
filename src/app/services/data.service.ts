@@ -8,7 +8,7 @@ import {IntervalObservable} from 'rxjs/observable/IntervalObservable';
 @Injectable()
 export class DataService {
  private data: IOperationsData[];
-  private BASE_URL = 'http://188.255.20.77:81/perFinance/api/';
+  private BASE_URL = 'http://85.30.248.254:81/perFinance/api/';
   static createTransferItem(from: string, to: string, balance: number) {
     return {
       from,
